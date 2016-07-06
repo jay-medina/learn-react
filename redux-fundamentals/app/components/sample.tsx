@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 interface DemoProps {
-  text: string;
+  text: string
 }
+
 
 class Demo extends React.Component<DemoProps, {}> {
   render() {

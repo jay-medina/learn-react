@@ -4,7 +4,7 @@ import Sample from './sample.tsx';
 
 export interface HelloProps {
   compiler: string;
-  framework: string;
+  framework?: string;
 }
 
 export class Hello extends React.Component<HelloProps, {}> {
