@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './main.js',
+  entry: './app/main.tsx',
   output: {
-    path: './',
+    path: './dist/',
     filename: 'index.js'
   },
   devServer: {
@@ -11,12 +11,15 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.jsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loader: 'ts-loader'
+      }
+    ],
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'source-map-loader'
       }
     ]
   }
