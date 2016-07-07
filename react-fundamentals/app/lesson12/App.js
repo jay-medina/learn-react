@@ -40,9 +40,8 @@ const Mixin = function (InnerComponent) {
     this.setState({val: this.state.val + 1});
   };
 
-  MixinClass.prototype.componentWillMount = function() {
-    console.log('will mount');
-  };
+  MixinClass.prototype.componentWillMount = () => console.log('will mount');
+  
 
   MixinClass.prototype.render = function() {
     return (

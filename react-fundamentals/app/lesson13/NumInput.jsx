@@ -1,6 +1,29 @@
-import React from 'react';
+import * as React from 'react';
 
-class NumInput extends React.Component { 
+class NumInput extends React.Component {
+  static get propTypes() {
+    return {
+      min: React.PropTypes.number,
+      max: React.PropTypes.number,
+      step: React.PropTypes.number,
+      val: React.PropTypes.number,
+      label: React.PropTypes.string,
+      update: React.PropTypes.func.isRequired,
+      type: React.PropTypes.oneOf(['number', 'range'])
+    };
+  };
+
+  static get defaultProps() {
+    return {
+      min: 0,
+      max: 0,
+      step: 1,
+      val: 0,
+      label: '',
+      type: 'range'
+    };
+  }
+
   getLabel() {
     if(this.props.label !== '') {
       return <label>{this.props.label} - {this.props.val}</label>
@@ -28,24 +51,5 @@ class NumInput extends React.Component {
     );
   }
 }
-
-NumInput.propTypes = {
-  min: React.PropTypes.number,
-  max: React.PropTypes.number,
-  step: React.PropTypes.number,
-  val: React.PropTypes.number,
-  label: React.PropTypes.string,
-  update: React.PropTypes.func.isRequired,
-  type: React.PropTypes.oneOf(['number', 'range'])
-};
-
-NumInput.defaultProps = {
-  min: 0,
-  max: 0,
-  step: 1,
-  val: 0,
-  label: '',
-  type: 'range'
-};
 
 export default NumInput;

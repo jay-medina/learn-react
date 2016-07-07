@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import NumInput from './NumInput.jsx';
 
 class App extends React.Component {
