@@ -7,11 +7,5 @@
         "module": "commonjs",
         "target": "es5",
         "jsx": "react"
-    },
-    "files": [
-        "./typings/index.d.ts",
-        "./app/components/app.tsx",
-        "./app/components/sample.tsx",
-        "./app/main.tsx"
-    ]
+    }
 }
