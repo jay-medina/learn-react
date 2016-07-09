@@ -1,11 +1,3 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as CounterApp from './counter/counterApp.tsx';
 
-import counterStore from './counter/counterStore.ts';
-
-counterStore();
-
-/*ReactDOM.render(
-  <div>test</div>, 
-  document.getElementById('app')
-); */
+CounterApp.initialize();

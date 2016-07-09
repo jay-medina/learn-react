@@ -14,17 +14,4 @@ function counter(state = 0, action: Action) {
   }
 }
 
-/*function expect(actual:number, msg?: string) {
-  
-  return {
-    toEqual: (expcted: number) => {
-      console.assert(actual == expcted, `${actual} != ${expcted}`, msg);
-    }
-  }
-}
-
-expect(
-  counter(0, {type: 'INCREMENT'})
-).toEqual(1);
-*/
 export {Action, counter};
