@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-class Thread extends React.Component<{}, {}> {
+class ThreadBody extends React.Component<{}, {}> {
   render() {
     return (
-      <div className="thread">
+      <div className="threadBody">
         {this.props.children}
       </div>
     );
   }
 }
 
-export default Thread;
+export default ThreadBody;

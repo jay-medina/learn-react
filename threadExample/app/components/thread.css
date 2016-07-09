@@ -1,0 +1,33 @@
+body {
+  font-size: 16px;
+}
+.thread {
+  border: 1px solid #dadada;
+}
+
+.thread > * {
+  padding: 0 0.5rem;
+}
+
+.thread .threadHeader {
+  background-color: #FFF;
+  padding: 1rem;
+}
+
+.thread .threadBody {
+  background-color:#e9ebee;
+}
+
+.thread .threadNode {
+  padding: 0.5rem;  
+}
+
+.threadReply {
+  padding: 0.5rem 0;
+}
+.threadReply .thread__replyInput {
+  padding: 0.5rem;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #dadada;
+}
