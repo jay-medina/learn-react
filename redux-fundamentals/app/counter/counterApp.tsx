@@ -3,18 +3,25 @@ import * as ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {counter, CounterActions} from './counterReducer.ts';
 
-
-function print() {
-
-  ReactDOM.render(
-     <div>test</div>, 
-     document.getElementById('counterApp')
-  );
-}
-
+import Counter from './Counter.tsx';
 
 export function initialize() {
   const store = createStore(counter);
+
+  function print() {
+
+    ReactDOM.render(
+      <Counter value={store.getState()}
+               onIncrement={ () => 
+                 store.dispatch({ type: CounterActions.INCREMENT})
+               }
+               onDecrement={ () => 
+                 store.dispatch({ type: CounterActions.DECREMENT})
+               }/>, 
+      document.getElementById('counterApp')
+    );
+  }
+
   store.subscribe(print);
   print();
 }
