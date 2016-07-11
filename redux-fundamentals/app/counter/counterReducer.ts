@@ -1,17 +1,16 @@
-interface Action {
-  type: CounterActions;
+export interface Action {
+  type: string;
 }
 
-export enum CounterActions {
-  INCREMENT, DECREMENT
-}
+export const CounterActions = {
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT'
+};
 
-function counter(state = 0, action: Action) {
+export function counter(state = 0, action: Action) {
   switch(action.type) {
     case CounterActions.INCREMENT : return state + 1;
     case CounterActions.DECREMENT : return state - 1;
     default: return state;
   }
 }
-
-export {Action, counter};
