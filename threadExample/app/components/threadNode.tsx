@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-class ThreadNode extends React.Component<{}, {}> {
+export interface ThreadNodeProps {
+  className?: string
+}
+class ThreadNode extends React.Component<ThreadNodeProps, {}> {
   render() {
     return (
-      <div className="threadNode">
+      <div className={this.props.className + " threadNode"}>
         {this.props.children}
       </div>
     );

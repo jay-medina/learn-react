@@ -7,12 +7,6 @@ body {
   margin: 0 auto;
 }
 
-
-.thread .threadHeader {
-  background-color: #FFF;
-  padding: 1rem;
-}
-
 .thread .threadBody {
   background-color:#e9ebee;
 }
@@ -20,6 +14,11 @@ body {
 .thread .threadNode {
   padding: 0.5rem 1rem; 
   border-bottom: 1px solid #dde0e6; 
+}
+
+.thread .threadNode.threadHeader {
+  background-color: #FFF;
+  padding: 1rem;
 }
 
 .threadReply {
