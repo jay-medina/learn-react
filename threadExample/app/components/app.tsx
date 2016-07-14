@@ -9,7 +9,7 @@ export class App extends React.Component<{}, {}> {
     return (
       <Thread>
        <ThreadNode className="threadHeader">
-        Thread Header
+        Thread Header - Hello World
        </ThreadNode>
        <ThreadBody>
          <ThreadNode>Hello World</ThreadNode>
