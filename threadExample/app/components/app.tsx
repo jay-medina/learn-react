@@ -11,7 +11,7 @@ export class App extends React.Component<{}, {}> {
       <Thread>
        <ThreadHeader />
        <ThreadBody>
-         <ThreadNode>Node 1</ThreadNode>
+         <ThreadNode>Hello World</ThreadNode>
          <ThreadNode>Node 2</ThreadNode>
          <ThreadNode>Node 3</ThreadNode>
          <ThreadNode>Node 4</ThreadNode>

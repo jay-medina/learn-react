@@ -3,11 +3,10 @@ body {
 }
 .thread {
   border: 1px solid #dadada;
+  width: 40vw;
+  margin: 0 auto;
 }
 
-.thread > * {
-  padding: 0 0.5rem;
-}
 
 .thread .threadHeader {
   background-color: #FFF;
@@ -19,7 +18,8 @@ body {
 }
 
 .thread .threadNode {
-  padding: 0.5rem;  
+  padding: 0.5rem 1rem; 
+  border-bottom: 1px solid #dde0e6; 
 }
 
 .threadReply {
