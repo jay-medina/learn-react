@@ -1,5 +1,6 @@
-body {
-  font-size: 16px;
+html, body {
+  font-size: 14px;
+  font-family: Helvetica, Arial, sans-serif;
 }
 .thread {
   border: 1px solid #dadada;
@@ -22,11 +23,16 @@ body {
 }
 
 .threadReply {
-  padding: 0.5rem 0;
+  padding: 1rem;
+  color: #646d7a;
 }
 .threadReply .thread__replyInput {
   padding: 0.5rem;
   box-sizing: border-box;
   width: 100%;
   border: 1px solid #dadada;
+  background-color: #FFF;
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
 }
