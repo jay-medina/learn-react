@@ -1,0 +1,15 @@
+.todos {
+  list-style: none;
+  padding: 0;
+}
+
+.todoItem {
+  cursor: pointer;
+  padding: 0.25em;
+  margin-bottom: 0.25em;
+  border: 1px solid #888;
+
+}
+.todoItem.completed {
+  text-decoration: line-through;
+}
