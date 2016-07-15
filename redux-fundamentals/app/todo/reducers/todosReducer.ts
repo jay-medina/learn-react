@@ -30,7 +30,7 @@ function addTodoReducer(state: Todo[] = [], action: TodoAction) {
 function toggleTodoReducer(state: Todo[] = [], action: TodoAction) {
   return state.map(t => {
     if (t.id !== action.id) {
-      return state;
+      return t;
     }
 
     return Object.assign({}, t, { completed: !t.completed });
