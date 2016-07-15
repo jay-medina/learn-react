@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ThreadNode from './threadNode.tsx';
 
 export interface ThreadReplyState {
   replyStarted: boolean
@@ -36,9 +37,9 @@ class ThreadReply extends React.Component<{}, ThreadReplyState> {
   }
   render() {
     return (
-      <div className="threadReply start">
+      <ThreadNode className="threadReply start">
         {this.renderSubView()}
-      </div>
+      </ThreadNode>
     );
   }
 }

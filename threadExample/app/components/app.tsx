@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Thread from './thread.tsx';
+import ThreadHeader from './threadHeader.tsx';
 import ThreadBody from './threadBody.tsx';
 import ThreadNode from './threadNode.tsx';
 import ThreadReply from './threadReply.tsx';
@@ -8,9 +9,9 @@ export class App extends React.Component<{}, {}> {
   render() {
     return (
       <Thread>
-       <ThreadNode className="threadHeader">
+       <ThreadHeader>
         Thread Header - Hello World
-       </ThreadNode>
+       </ThreadHeader>
        <ThreadBody>
          <ThreadNode>Hello World</ThreadNode>
          <ThreadNode>Hi World</ThreadNode>
