@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Todo} from './todosReducer.ts';
+import {Todo, ActionTypes} from '../reducers/todosReducer.ts';
+import TodoItemView from './TodoItem.tsx';
 
 export interface TodoProps {
   store: any,
@@ -22,7 +23,7 @@ class TodoAppView extends React.Component<TodoProps, TodoState> {
   }
   onClick() {
     this.props.store.dispatch({
-      type: 'ADD_TODO',
+      type: ActionTypes.ADD_TODO,
       text: this.state.inputValue,
       id: id++
     });
@@ -33,15 +34,17 @@ class TodoAppView extends React.Component<TodoProps, TodoState> {
   }
   renderTodos() {
     return this.props.todos.map(todo => {
-      return <li key={todo.id}>{todo.text}</li>
-    });
+      return <TodoItemView key={todo.id} store={this.props.store} {...todo}>
+                {todo.text}
+             </TodoItemView>
+    })
   }
   render() {
     return (
       <div>
         <input value={this.state.inputValue} onChange={this.onInputChange.bind(this)} />
         <button onClick={this.onClick.bind(this)}>Add Todo</button>
-        <ul>
+        <ul className="todos">
           {this.renderTodos()}
         </ul>
       </div>
