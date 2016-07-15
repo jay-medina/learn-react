@@ -1,13 +1,19 @@
-import {Action} from 'redux';
-import TodosReducer, {Todo, TodoAction} from './todosReducer.ts';
-import VisibilityReducer, {VisibilityAction} from './visibilityReducer.ts';
+import {Action, combineReducers} from 'redux';
+import TodosReducer, {Todo} from './todosReducer.ts';
+import VisibilityReducer from './visibilityReducer.ts';
 
-export interface TodoApp {
+export interface ITodoAppReducer {
   todos: Todo[],
-  visibilityFilter: string
+  visibilityFilter: {}
 }
 
-export default function TodoAppReducer(state = {} as TodoApp, action: Action) {
+
+const TodoAppReducer = combineReducers<ITodoAppReducer>({
+  todos: TodosReducer,
+  visibilityFilter: VisibilityReducer
+});
+
+/*export default function TodoAppReducer(state = {} as TodoApp, action: Action) {
   return {
     todos: TodosReducer(
       state.todos,
@@ -18,4 +24,6 @@ export default function TodoAppReducer(state = {} as TodoApp, action: Action) {
       action as VisibilityAction
     )
   };
-}
+} */
+
+export default TodoAppReducer;
