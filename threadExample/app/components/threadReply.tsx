@@ -45,5 +45,3 @@ class ThreadReply extends React.Component<{}, ThreadReplyState> {
 }
 
 export default ThreadReply;
-
-/* input type="text" className="thread__replyInput" placeholder="Write a reply" */
