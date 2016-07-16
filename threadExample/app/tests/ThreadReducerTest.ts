@@ -2,6 +2,8 @@ import ThreadReducer, {ThreadAction, ActionTypes} from '../reducers/ThreadReduce
 
 export function execute() {
   var timestamp = 1468613933179;
+  var _oldDateNow = Date.now;
+
   Date.now = function () {
     return timestamp++;
   }
@@ -41,4 +43,5 @@ export function execute() {
   ),
     [{ person: 'jose', text: 'first post', timestamp: 1468613933179, id: 0 }], 'deleting an id that doesn\'t exist');
 
+  Date.now = _oldDateNow;
 }
