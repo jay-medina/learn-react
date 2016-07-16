@@ -13,3 +13,7 @@
 .todoItem.completed {
   text-decoration: line-through;
 }
+
+.filteritem{ 
+  margin-right: 5px;
+}

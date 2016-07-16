@@ -4,7 +4,7 @@ import VisibilityReducer from './visibilityReducer.ts';
 
 export interface ITodoAppReducer {
   todos: Todo[],
-  visibilityFilter: {}
+  visibilityFilter: string
 }
 
 

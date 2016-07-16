@@ -8,9 +8,10 @@ import TodoAppView from './views/Todo.tsx';
 export function initialize() {
   const store = createStore<ITodoAppReducer>(TodoAppReducer);
   function print() {
+    const state = store.getState();
 
     ReactDOM.render(
-      <TodoAppView store={store} todos={store.getState().todos} />, 
+      <TodoAppView store={store} todos={state.todos} filter={state.visibilityFilter} />, 
       document.getElementById('todoApp')
     );
   }
