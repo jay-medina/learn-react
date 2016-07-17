@@ -6,11 +6,17 @@ import ThreadBody from './threadBody.tsx';
 import ThreadNode from './threadNode.tsx';
 import ThreadReply from './threadReply.tsx';
 
-export class App extends React.Component<{}, {}> {
+export interface AppProps {
+  store: any,
+  person: string
+}
+
+export class App extends React.Component<AppProps, {}> {
   render() {
+    console.log(`state is ${JSON.stringify(this.props.store.getState())}`);
     return (
       <div className="app">
-      <ThreadStarter></ThreadStarter>
+      <ThreadStarter {...this.props}></ThreadStarter>
       <Thread>
        <ThreadHeader>
         Thread Header - Hello World

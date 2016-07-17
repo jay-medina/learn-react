@@ -17,6 +17,7 @@ html, body {
   box-sizing: border-box;
   width: 100%;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .activate {
@@ -25,6 +26,7 @@ html, body {
 
 .activate .threadStarter {
   margin-bottom: 0.5em;
+  cursor: text;
 }
 
 .buttonContainer {
@@ -34,7 +36,7 @@ html, body {
   background-color: #215c98;
   border: 0;
   color: #DDD;
-  font-size: 0.8em;
+  font-size: 1em;
   padding: 0.5em 1em 0.65em;
   border-radius: 3px;
 }
