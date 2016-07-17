@@ -32,7 +32,7 @@ html, body {
 .buttonContainer {
   text-align: right;
 }
-.activate .postBtn {
+.postBtn {
   background-color: #215c98;
   border: 0;
   color: #DDD;

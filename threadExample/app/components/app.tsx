@@ -1,10 +1,7 @@
 import * as React from 'react';
 import Thread from './thread.tsx';
 import ThreadStarter from './threadStarter.tsx';
-import ThreadHeader from './threadHeader.tsx';
-import ThreadBody from './threadBody.tsx';
-import ThreadNode from './threadNode.tsx';
-import ThreadReply from './threadReply.tsx';
+
 
 export interface AppProps {
   store: any,
@@ -12,24 +9,21 @@ export interface AppProps {
 }
 
 export class App extends React.Component<AppProps, {}> {
+  renderThreads() {
+    const state = this.props.store.getState();
+
+    const keys = Object.keys(state);
+    return keys.map(id => {
+      return <Thread key={id} threadNodes={state[id]}></Thread>;
+    });
+  }
   render() {
+    const {store, person} = this.props;
     console.log(`state is ${JSON.stringify(this.props.store.getState())}`);
     return (
       <div className="app">
-      <ThreadStarter {...this.props}></ThreadStarter>
-      <Thread>
-       <ThreadHeader>
-        Thread Header - Hello World
-       </ThreadHeader>
-       <ThreadBody>
-         <ThreadNode>Hello World</ThreadNode>
-         <ThreadNode>Hi World</ThreadNode>
-         <ThreadNode>Waiting until my phone comes back</ThreadNode>
-         <ThreadNode>Sigh...</ThreadNode>
-         <ThreadReply />
-       </ThreadBody>
-       
-      </Thread>
+      <ThreadStarter dispatch={store.dispatch} person={person}></ThreadStarter>
+      {this.renderThreads()}
       </div>
     );
   }

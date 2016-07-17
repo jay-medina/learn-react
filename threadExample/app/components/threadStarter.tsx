@@ -1,9 +1,11 @@
 import * as React from 'react';
 import ThreadNode from './threadNode.tsx';
+import PostButton from './postButton.tsx';
+
 import {ActionTypes, MultiThreadAction} from '../reducers/MultiThreadReducer.ts';
 
 export interface ThreadStarterProps {
-  store: any,
+  dispatch: (any) => void,
   person: string
 }
 export interface ThreadStarterState {
@@ -28,9 +30,9 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
   }
   createThread(e) {
     e.preventDefault();
-    const {store, person} = this.props;
+    const {dispatch, person} = this.props;
 
-    store.dispatch({
+    dispatch({
       person,
       type: ActionTypes.CREATE_THREAD,
       text: this.state.starterText
@@ -49,9 +51,7 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
     return (
       <form className="activate" onSubmit={this.createThread.bind(this)}>
         <textarea onChange={this.updateStarterText.bind(this)} type="text" className="threadStarter" autoFocus/>
-        <div className="buttonContainer">
-        <button className="postBtn">Post</button>
-        </div>
+        <PostButton />
       </form> 
     )
   }
