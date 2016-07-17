@@ -1,46 +1,70 @@
 import * as React from 'react';
 import ThreadNode from './threadNode.tsx';
+import PostButton from './postButton.tsx';
 
+import {ActionTypes} from '../reducers/ThreadReducer.ts';
+
+export interface ThreadReplyProps {
+  dispatch: (any) => void,
+  person: string,
+  thread_id: string
+}
 export interface ThreadReplyState {
-  replyStarted: boolean
+  replyActivated?: boolean,
+  replyText?: string
 }
 
-class ThreadReply extends React.Component<{}, ThreadReplyState> {
+class ThreadReply extends React.Component<ThreadReplyProps, ThreadReplyState> {
   constructor() {
     super();
 
     this.state = {
-      replyStarted: false
+      replyActivated: false,
+      replyText: ''
     };
   }
-  onClick() {
-    this.setState({replyStarted: true});
+  activateReply() {
+    this.setState({replyActivated: true});
+  }
+  updateReplyText(e) {
+    this.setState({replyText: e.target.value});
+  }
+  createReply(e) {
+    e.preventDefault();
+    const {dispatch, person, thread_id} = this.props;
+    
+    dispatch({
+      person,
+      thread_id,
+      type: ActionTypes.ADD_POST,
+      text: this.state.replyText
+    });
+
+    this.setState({replyActivated: false, replyText: ''});
   }
   renderInitialView() {
     return (
-      <div onClick={this.onClick.bind(this)} className="thread__replyInput">
-        Write a Reply
-      </div>
+      <ThreadNode className="threadReply start">
+        <div onClick={this.activateReply.bind(this)} className="thread__replyInput">
+          Write a Reply
+        </div>
+      </ThreadNode>
     );
   }
   renderAfterClickView() {
     return (
-      <input type="text" className="thread__replyInput" autoFocus/> 
+      <form className="threadReply start" onSubmit={this.createReply.bind(this)}>
+        <input type="text" onChange={this.updateReplyText.bind(this)} className="thread__replyInput" autoFocus/> 
+        <PostButton />
+      </form>
     )
   }
-  renderSubView() {
-    if(this.state.replyStarted) {
+  render() {
+    if(this.state.replyActivated) {
       return this.renderAfterClickView();
     }
     
     return this.renderInitialView();
-  }
-  render() {
-    return (
-      <ThreadNode className="threadReply start">
-        {this.renderSubView()}
-      </ThreadNode>
-    );
   }
 }
 

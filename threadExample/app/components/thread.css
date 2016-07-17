@@ -41,6 +41,10 @@ html, body {
   border-radius: 3px;
 }
 
+.thread {
+  margin-bottom: 2rem;
+}
+
 .thread .threadBody {
   background-color:#e9ebee;
 }
@@ -68,4 +72,5 @@ html, body {
   cursor: pointer;
   outline: none;
   font-size: 1rem;
+  margin-bottom: 1em;
 }

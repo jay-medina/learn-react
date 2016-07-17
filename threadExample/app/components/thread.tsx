@@ -5,7 +5,10 @@ import ThreadNode from './threadNode.tsx';
 import ThreadReply from './threadReply.tsx';
 
 export interface ThreadProps {
-  threadNodes: any[]
+  thread_id: string,
+  threadNodes: any[],
+  dispatch: (any) => void,
+  person: string
 }
 
 class Thread extends React.Component<ThreadProps, {}> {
@@ -13,12 +16,12 @@ class Thread extends React.Component<ThreadProps, {}> {
     return <ThreadHeader>{node.text}</ThreadHeader>;
   }
   renderRest(nodes) {
-    const threadNodes = nodes.map(node => {
-      return <ThreadNode>node.text</ThreadNode>;
+    return nodes.map(node => {
+      return <ThreadNode key={node.id}>{node.text}</ThreadNode>;
     });
   }
   render() {
-    const {threadNodes} = this.props;
+    const {threadNodes, dispatch, person, thread_id} = this.props;
     const first = threadNodes[0];
     const rest = threadNodes.slice(1);
 
@@ -27,7 +30,7 @@ class Thread extends React.Component<ThreadProps, {}> {
         {this.renderFirst(first)}
         <ThreadBody>
           {this.renderRest(rest)}
-          <ThreadReply />
+          <ThreadReply thread_id={thread_id} dispatch={dispatch} person={person}/>
         </ThreadBody>
       </div>
     );

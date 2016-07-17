@@ -10,11 +10,17 @@ export interface AppProps {
 
 export class App extends React.Component<AppProps, {}> {
   renderThreads() {
-    const state = this.props.store.getState();
+    const {store, person} = this.props;
+    const state = store.getState();
 
-    const keys = Object.keys(state);
+    const keys = Object.keys(state).reverse();
+
     return keys.map(id => {
-      return <Thread key={id} threadNodes={state[id]}></Thread>;
+      return <Thread key={id} 
+                     thread_id={id} 
+                     person={person} 
+                     threadNodes={state[id]}
+                     dispatch={store.dispatch}></Thread>;
     });
   }
   render() {
