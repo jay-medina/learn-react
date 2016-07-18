@@ -26,7 +26,8 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
     this.setState({starterActivated: true});
   }
   updateStarterText(e) {
-    this.setState({starterText: e.target.value});
+    const starterText = e.target.value.trim();
+    this.setState({starterText});
   }
   createThread(e) {
     e.preventDefault();
@@ -42,32 +43,27 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
   }
   renderInitialView() {
     return (
-      <div onClick={this.activateStarter.bind(this)} className="threadStarter">
+       <ThreadNode className="start">
+         <div onClick={this.activateStarter.bind(this)} className="threadStarter">
         Share something...
-      </div>
+        </div> 
+      </ThreadNode>
     );
   }
   renderAfterClickView() {
     return (
       <form className="activate" onSubmit={this.createThread.bind(this)}>
         <textarea onChange={this.updateStarterText.bind(this)} type="text" className="threadStarter" autoFocus/>
-        <PostButton />
+        <PostButton active={this.state.starterText.length > 0} />
       </form> 
     )
   }
-  renderSubView() {
+  render() {
     if(this.state.starterActivated) {
       return this.renderAfterClickView();
     }
     
     return this.renderInitialView();
-  }
-  render() {
-    return (
-      <ThreadNode className="start">
-        {this.renderSubView()}
-      </ThreadNode>
-    );
   }
 }
 

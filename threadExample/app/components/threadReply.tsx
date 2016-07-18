@@ -27,12 +27,13 @@ class ThreadReply extends React.Component<ThreadReplyProps, ThreadReplyState> {
     this.setState({replyActivated: true});
   }
   updateReplyText(e) {
-    this.setState({replyText: e.target.value});
+    const replyText = e.target.value.trim();
+    this.setState({replyText});
   }
   createReply(e) {
     e.preventDefault();
     const {dispatch, person, thread_id} = this.props;
-    
+
     dispatch({
       person,
       thread_id,
@@ -55,7 +56,7 @@ class ThreadReply extends React.Component<ThreadReplyProps, ThreadReplyState> {
     return (
       <form className="threadReply start" onSubmit={this.createReply.bind(this)}>
         <input type="text" onChange={this.updateReplyText.bind(this)} className="thread__replyInput" autoFocus/> 
-        <PostButton />
+        <PostButton active={this.state.replyText.length > 0} />
       </form>
     )
   }

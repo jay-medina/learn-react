@@ -35,10 +35,16 @@ html, body {
 .postBtn {
   background-color: #215c98;
   border: 0;
-  color: #DDD;
+  color: #FFF;
   font-size: 1em;
   padding: 0.5em 1em 0.65em;
   border-radius: 3px;
+  opacity: .5;
+}
+
+.postBtn.active {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .thread {
