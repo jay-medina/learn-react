@@ -1,26 +1,36 @@
 import * as React from 'react';
 import Thread from './thread.tsx';
-import ThreadHeader from './threadHeader.tsx';
-import ThreadBody from './threadBody.tsx';
-import ThreadNode from './threadNode.tsx';
-import ThreadReply from './threadReply.tsx';
+import ThreadStarter from './threadStarter.tsx';
 
-export class App extends React.Component<{}, {}> {
+
+export interface AppProps {
+  store: any,
+  person: string
+}
+
+export class App extends React.Component<AppProps, {}> {
+  renderThreads() {
+    const {store, person} = this.props;
+    const state = store.getState();
+
+    const keys = Object.keys(state).reverse();
+
+    return keys.map(id => {
+      return <Thread key={id} 
+                     thread_id={id} 
+                     person={person} 
+                     threadNodes={state[id]}
+                     dispatch={store.dispatch}></Thread>;
+    });
+  }
   render() {
+    const {store, person} = this.props;
+    console.log(`state is ${JSON.stringify(this.props.store.getState())}`);
     return (
-      <Thread>
-       <ThreadHeader>
-        Thread Header - Hello World
-       </ThreadHeader>
-       <ThreadBody>
-         <ThreadNode>Hello World</ThreadNode>
-         <ThreadNode>Hi World</ThreadNode>
-         <ThreadNode>Waiting until my phone comes back</ThreadNode>
-         <ThreadNode>Sigh...</ThreadNode>
-         <ThreadReply />
-       </ThreadBody>
-       
-      </Thread>
+      <div className="app">
+      <ThreadStarter dispatch={store.dispatch} person={person}></ThreadStarter>
+      {this.renderThreads()}
+      </div>
     );
   }
 }

@@ -2,10 +2,53 @@ html, body {
   font-size: 14px;
   font-family: Helvetica, Arial, sans-serif;
 }
-.thread {
-  border: 1px solid #dadada;
-  width: 40vw;
+.app {
   margin: 0 auto;
+  width: 40vw;
+}
+.thread, .threadStarter {
+  border: 1px solid #dadada;
+}
+
+.threadStarter {
+  display: block;
+  margin-bottom: 1em;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.activate {
+  margin-bottom: 1em;
+}
+
+.activate .threadStarter {
+  margin-bottom: 0.5em;
+  cursor: text;
+}
+
+.buttonContainer {
+  text-align: right;
+}
+.postBtn {
+  background-color: #215c98;
+  border: 0;
+  color: #FFF;
+  font-size: 1em;
+  padding: 0.5em 1em 0.65em;
+  border-radius: 3px;
+  opacity: .5;
+}
+
+.postBtn.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.thread {
+  margin-bottom: 2rem;
 }
 
 .thread .threadBody {
@@ -35,4 +78,5 @@ html, body {
   cursor: pointer;
   outline: none;
   font-size: 1rem;
+  margin-bottom: 1em;
 }

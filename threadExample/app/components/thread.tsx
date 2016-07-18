@@ -1,10 +1,37 @@
 import * as React from 'react';
+import ThreadHeader from './threadHeader.tsx';
+import ThreadBody from './threadBody.tsx';
+import ThreadNode from './threadNode.tsx';
+import ThreadReply from './threadReply.tsx';
 
-class Thread extends React.Component<{}, {}> {
+export interface ThreadProps {
+  thread_id: string,
+  threadNodes: any[],
+  dispatch: (any) => void,
+  person: string
+}
+
+class Thread extends React.Component<ThreadProps, {}> {
+  renderFirst(node) {
+    return <ThreadHeader>{node.text}</ThreadHeader>;
+  }
+  renderRest(nodes) {
+    return nodes.map(node => {
+      return <ThreadNode key={node.id}>{node.text}</ThreadNode>;
+    });
+  }
   render() {
+    const {threadNodes, dispatch, person, thread_id} = this.props;
+    const first = threadNodes[0];
+    const rest = threadNodes.slice(1);
+
     return (
       <div className="thread">
-        {this.props.children}
+        {this.renderFirst(first)}
+        <ThreadBody>
+          {this.renderRest(rest)}
+          <ThreadReply thread_id={thread_id} dispatch={dispatch} person={person}/>
+        </ThreadBody>
       </div>
     );
   }
