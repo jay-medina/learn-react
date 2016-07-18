@@ -25,6 +25,11 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
   activateStarter() {
     this.setState({starterActivated: true});
   }
+  deactivateStarter(e) {
+    if(this.state.starterText.length === 0) {
+      this.setState({starterActivated:false});
+    }
+  }
   updateStarterText(e) {
     const starterText = e.target.value.trim();
     this.setState({starterText});
@@ -53,7 +58,9 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
   renderAfterClickView() {
     return (
       <form className="activate" onSubmit={this.createThread.bind(this)}>
-        <textarea onChange={this.updateStarterText.bind(this)} type="text" className="threadStarter" autoFocus/>
+        <textarea onChange={this.updateStarterText.bind(this)}
+                  onBlur={this.deactivateStarter.bind(this)} 
+                  className="threadStarter" autoFocus/>
         <PostButton active={this.state.starterText.length > 0} />
       </form> 
     )
