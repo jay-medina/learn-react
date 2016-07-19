@@ -13,7 +13,7 @@ export interface ThreadProps {
 
 class Thread extends React.Component<ThreadProps, {}> {
   renderFirst(node) {
-    return <ThreadHeader>{node.text}</ThreadHeader>;
+    return <ThreadHeader person={node.person}>{node.text}</ThreadHeader>;
   }
   renderRest(nodes) {
     return nodes.map(node => {

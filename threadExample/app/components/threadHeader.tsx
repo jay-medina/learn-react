@@ -1,10 +1,13 @@
 import * as React from 'react';
 import ThreadNode from './threadNode.tsx';
 
-class ThreadHeader extends React.Component<{}, {}> {
+export interface ThreadHeaderProps {
+  person: string
+}
+class ThreadHeader extends React.Component<ThreadHeaderProps, {}> {
   render() {
     return (
-      <ThreadNode className="threadHeader">
+      <ThreadNode className="threadHeader" person={this.props.person}>
         {this.props.children}
        </ThreadNode>
     );

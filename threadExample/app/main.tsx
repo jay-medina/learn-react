@@ -6,7 +6,7 @@ import MultiThreadReducer from './reducers/MultiThreadReducer.ts';
 
 import { App } from './components/app.tsx';
 const store = createStore(MultiThreadReducer);
-const person = 'jose';
+const person = 'Jose Medina';
 
 function print() {
   ReactDOM.render(
