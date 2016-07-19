@@ -60,6 +60,11 @@ html, body {
   border-bottom: 1px solid #dde0e6; 
 }
 
+.thread .nodeTitle {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
 .thread .threadHeader {
   background-color: #FFF;
   padding: 1rem;
