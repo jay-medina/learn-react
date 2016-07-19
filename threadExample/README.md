@@ -3,8 +3,8 @@
 #TODO
 - ~~Add a post~~
 - ~~Add a reply~~
-- Display Person's name
-- Display Timestamp
+- ~~Display Person's name~~
+- ~~Display Timestamp~~
 - Like a post
 - ~~Reply to Post~~
 - ~~Post Button~~
