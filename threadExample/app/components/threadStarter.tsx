@@ -57,8 +57,9 @@ class ThreadStarter extends React.Component<ThreadStarterProps, ThreadStarterSta
   }
   renderAfterClickView() {
     return (
-      <form className="activate" onSubmit={this.createThread.bind(this)} onBlur={this.deactivateStarter.bind(this)}>
-        <textarea onChange={this.updateStarterText.bind(this)} 
+      <form className="activate" onSubmit={this.createThread.bind(this)}>
+        <textarea onChange={this.updateStarterText.bind(this)}
+                  onBlur={this.deactivateStarter.bind(this)} 
                   className="threadStarter" autoFocus/>
         <PostButton active={this.state.starterText.length > 0} />
       </form> 
