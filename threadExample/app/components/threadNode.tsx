@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as DateHelper from './DateHelper.ts';
 
 export interface ThreadNodeProps {
   className?: string,
@@ -15,7 +16,10 @@ class ThreadNode extends React.Component<ThreadNodeProps, {}> {
     const {person, timestamp} = this.props;
     if(person && timestamp) {
       return (
-        <div className="nodeTitle">{person} - {timestamp}</div>
+        <div className="nodeTitle">
+         <span className="nodePerson">{person}</span> - 
+         <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
+        </div>
       )
     }
     return <span></span>;

@@ -61,8 +61,17 @@ html, body {
 }
 
 .thread .nodeTitle {
-  font-weight: bold;
   margin-bottom: 0.5em;
+}
+
+.thread .nodePerson {
+  font-weight: bold;
+}
+
+.thread .nodeTimestamp {
+  color: #888;
+  font-size: 0.9em;
+  margin-left: 0.25em;
 }
 
 .thread .threadHeader {
