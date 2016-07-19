@@ -2,7 +2,8 @@ import * as React from 'react';
 
 export interface ThreadNodeProps {
   className?: string,
-  person? : string
+  person? : string,
+  timestamp? : number
 }
 class ThreadNode extends React.Component<ThreadNodeProps, {}> {
   getClassNames() {
@@ -11,9 +12,10 @@ class ThreadNode extends React.Component<ThreadNodeProps, {}> {
     return (className)? className : 'threadNode';
   }
   getNodeTitle() {
-    if(this.props.person) {
+    const {person, timestamp} = this.props;
+    if(person && timestamp) {
       return (
-        <div className="nodeTitle">{this.props.person}</div>
+        <div className="nodeTitle">{person} - {timestamp}</div>
       )
     }
     return <span></span>;

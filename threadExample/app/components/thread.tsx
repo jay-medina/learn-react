@@ -13,11 +13,11 @@ export interface ThreadProps {
 
 class Thread extends React.Component<ThreadProps, {}> {
   renderFirst(node) {
-    return <ThreadHeader person={node.person}>{node.text}</ThreadHeader>;
+    return <ThreadHeader person={node.person} timestamp={node.timestamp}>{node.text}</ThreadHeader>;
   }
   renderRest(nodes) {
     return nodes.map(node => {
-      return <ThreadNode key={node.id} person={node.person}>{node.text}</ThreadNode>;
+      return <ThreadNode key={node.id} person={node.person} timestamp={node.timestamp}>{node.text}</ThreadNode>;
     });
   }
   render() {
