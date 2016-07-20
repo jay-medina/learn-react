@@ -11,7 +11,7 @@ export function initialize() {
     const state = store.getState();
 
     ReactDOM.render(
-      <TodoAppView store={store} todos={state.todos} filter={state.visibilityFilter} />, 
+      <TodoAppView dispatch={store.dispatch} todos={state.todos} filter={state.visibilityFilter} />, 
       document.getElementById('todoApp')
     );
   }

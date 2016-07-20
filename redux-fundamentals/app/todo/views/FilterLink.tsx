@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export interface FilterLinkProps {
-  store: any,
+  onFilterClick: (filter:string) => void,
   filter: string,
   selected: string
 }
@@ -9,14 +9,9 @@ export interface FilterLinkProps {
 class FilterLink extends React.Component<FilterLinkProps,{}> {
   onClick(e) {
     e.preventDefault();
-    const {store,filter} = this.props;
-
-    store.dispatch({
-      filter,
-      type: 'SET_VISIBILITY_FILTER'
-    })
+    const {filter} = this.props;
+    this.props.onFilterClick(filter);
   }
-  
   render() {
     const {selected, filter, children} = this.props;
 
