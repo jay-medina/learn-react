@@ -4,7 +4,8 @@ import * as DateHelper from './DateHelper.ts';
 export interface ThreadNodeProps {
   className?: string,
   person? : string,
-  timestamp? : number
+  timestamp? : number,
+  allowDelete?: boolean
 }
 class ThreadNode extends React.Component<ThreadNodeProps, {}> {
   getClassNames() {
@@ -17,8 +18,13 @@ class ThreadNode extends React.Component<ThreadNodeProps, {}> {
     if(person && timestamp) {
       return (
         <div className="nodeTitle">
-         <span className="nodePerson">{person}</span> - 
-         <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
+         <div className="personName">
+          <span className="nodePerson">{person}</span> - 
+          <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
+         </div>
+         <div className="deleteThread">
+           Delete
+         </div>
         </div>
       )
     }

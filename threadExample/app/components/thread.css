@@ -62,10 +62,30 @@ html, body {
 
 .thread .nodeTitle {
   margin-bottom: 0.5em;
+  display:flex;
+  flex-direction: row;
+}
+
+.thread .personName {
+  flex-grow: 1;
 }
 
 .thread .nodePerson {
   font-weight: bold;
+}
+
+.thread .deleteThread {
+  position:relative;
+  top: -5px;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.thread .deleteThread:before {
+  content: "🚫";
+  position: relative;
+  top: 1px;
+  cursor: pointer;
 }
 
 .thread .nodeTimestamp {
