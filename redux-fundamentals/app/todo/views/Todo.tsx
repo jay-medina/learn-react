@@ -1,70 +1,51 @@
 import * as React from 'react';
 import {Todo, ActionTypes} from '../reducers/todosReducer.ts';
-import TodoItemView from './TodoItem.tsx';
-import FilterLink from './FilterLink.tsx';
+import TodoList from './TodoList.tsx';
+import AddTodo from './AddTodo.tsx';
+import Footer from './Footer.tsx';
 
 export interface TodoProps {
-  store: any,
+  dispatch: (any) => void,
   todos: Todo[],
   filter: string
 }
 
-export interface TodoState {
-  inputValue: string
-}
-
 let id = 0;
 
-class TodoAppView extends React.Component<TodoProps, TodoState> {
+class TodoAppView extends React.Component<TodoProps, {}> {
   constructor() {
     super();
     
-    this.state = {
-      inputValue: ''
-    };
+    this.addTodo = this.addTodo.bind(this);
+    this.toggleTodo = this.toggleTodo.bind(this);
+    this.setVisibilityFilter = this.setVisibilityFilter.bind(this);
   }
-  onClick() {
-    this.props.store.dispatch({
+  addTodo(text) {
+    this.props.dispatch({
+      text,
       type: ActionTypes.ADD_TODO,
-      text: this.state.inputValue,
       id: id++
     });
-    this.setState({inputValue: ''});
   }
-  onInputChange(e) {
-    this.setState({inputValue: e.target.value});
+  toggleTodo(id) {
+    this.props.dispatch({
+      id,
+      type: ActionTypes.TOGGLE_TODO
+    });
   }
-  getFilteredTodos() {
-    const {todos, filter: filterText} = this.props;
-
-    switch(filterText) {
-      case 'SHOW_ALL': return todos;
-      case 'SHOW_COMPLETED': return todos.filter(todo => todo.completed);
-      case 'SHOW_ACTIVE': return todos.filter(todo => !todo.completed);
-    }
-  }
-  renderTodos() {
-    return this.getFilteredTodos().map(todo => {
-      return <TodoItemView key={todo.id} store={this.props.store} {...todo}>
-                {todo.text}
-             </TodoItemView>
-    })
+  setVisibilityFilter(filter) {
+    this.props.dispatch({
+      filter,
+      type: 'SET_VISIBILITY_FILTER'
+    });
   }
   render() {
-    const {store, filter:selected} = this.props;
+    const {filter:selected} = this.props;
     return (
       <div>
-        <input value={this.state.inputValue} onChange={this.onInputChange.bind(this)} />
-        <button onClick={this.onClick.bind(this)}>Add Todo</button>
-        <ul className="todos">
-          {this.renderTodos()}
-        </ul>
-        <p>
-          <label className="filteritem">Show:</label> 
-          <FilterLink selected={selected} filter="SHOW_ALL" store={store}>All</FilterLink>
-          <FilterLink selected={selected} filter="SHOW_ACTIVE" store={store}>Active</FilterLink>
-          <FilterLink selected={selected} filter="SHOW_COMPLETED" store={store}>Completed</FilterLink>
-        </p>
+        <AddTodo addTodo={this.addTodo} />
+        <TodoList {...this.props} toggleTodo={this.toggleTodo} />
+        <Footer selected={selected} setVisibilityFilter={this.setVisibilityFilter}/>
       </div>
     )
   }

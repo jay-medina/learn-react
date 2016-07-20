@@ -1,18 +1,14 @@
 import * as React from 'react';
-import {ActionTypes} from '../reducers/todosReducer.ts';
 
 export interface TodoItemProps {
-  store: any,
   id: number,
-  completed: boolean
+  completed: boolean,
+  onClick: (id) => void
 }
 
 class TodoItemView extends React.Component<TodoItemProps, {}> {
   onClick() {
-    this.props.store.dispatch({
-      type: ActionTypes.TOGGLE_TODO,
-      id: this.props.id
-    });
+    this.props.onClick(this.props.id);
   }
   addClassNames() {
     if(this.props.completed) {
