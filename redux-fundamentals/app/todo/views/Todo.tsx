@@ -40,7 +40,7 @@ class TodoAppView extends React.Component<TodoProps, {}> {
     });
   }
   render() {
-    const {dispatch, filter:selected} = this.props;
+    const {filter:selected} = this.props;
     return (
       <div>
         <AddTodo addTodo={this.addTodo} />
