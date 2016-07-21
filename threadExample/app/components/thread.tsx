@@ -17,7 +17,7 @@ class Thread extends React.Component<ThreadProps, {}> {
   }
   renderRest(nodes) {
     return nodes.map(node => {
-      return <ThreadNode key={node.id} person={node.person} timestamp={node.timestamp}>{node.text}</ThreadNode>;
+      return <ThreadNode className="threadRepliedNode" key={node.id} person={node.person} timestamp={node.timestamp}>{node.text}</ThreadNode>;
     });
   }
   render() {

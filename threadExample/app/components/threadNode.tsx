@@ -11,7 +11,7 @@ class ThreadNode extends React.Component<ThreadNodeProps, {}> {
   getClassNames() {
     const {className} = this.props; 
     
-    return (className)? className : 'threadNode';
+    return (className)? `${className} threadNode` : 'threadNode';
   }
   getNodeTitle() {
     const {person, timestamp} = this.props;
