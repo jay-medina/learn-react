@@ -88,8 +88,13 @@ html, body {
 .thread .deleteThread:before {
   content: "🚫";
   position: relative;
+  margin-right: 0.35em;
   top: 1px;
   cursor: pointer;
+}
+
+.thread .threadNode:hover .deleteThread {
+  visibility: visible;
 }
 
 .thread .nodeTimestamp {
