@@ -1,12 +1,11 @@
 import * as React from 'react';
-import ThreadNode from './threadNode.tsx';
 
 class ThreadBody extends React.Component<{}, {}> {
   render() {
     return (
-      <ThreadNode className="threadBody">
+      <div className="threadBody">
         {this.props.children}
-       </ThreadNode>
+       </div>
     );
   }
 }

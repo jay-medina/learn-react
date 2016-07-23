@@ -4,25 +4,35 @@ import * as DateHelper from './DateHelper.ts';
 export interface ThreadNodeProps {
   className?: string,
   person? : string,
-  timestamp? : number
+  timestamp? : number,
+  allowDelete?: boolean,
+  onDeleteClicked?: () => void
 }
+
 class ThreadNode extends React.Component<ThreadNodeProps, {}> {
   getClassNames() {
     const {className} = this.props; 
     
-    return (className)? className : 'threadNode';
+    return (className)? `${className} threadNode` : 'threadNode';
+  }
+  onDeleteClick() {
+    this.props.onDeleteClicked();
   }
   getNodeTitle() {
     const {person, timestamp} = this.props;
     if(person && timestamp) {
       return (
         <div className="nodeTitle">
-         <span className="nodePerson">{person}</span> - 
-         <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
+          <div className="personName">
+            <span className="nodePerson">{person}</span> - 
+            <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
+          </div>
+          <div className="deleteThread" onClick={this.onDeleteClick.bind(this)}>
+            Delete
+          </div>
         </div>
       )
     }
-    return <span></span>;
   }
   render() {
     return (

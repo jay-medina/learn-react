@@ -60,14 +60,12 @@ function deleteThread(state, thread_id) {
 }
 
 function deletePost(state, action) {
-  var {thread_id, text, person, post_id} = action;
+  var {thread_id, post_id} = action;
   var threadPosts = state[thread_id];
 
   if (threadPosts) {
     var newThread = {};
     newThread[thread_id] = ThreadReducer(threadPosts, {
-      text,
-      person,
       id: post_id,
       type: TActionTypes.DELETE_POST
     });
