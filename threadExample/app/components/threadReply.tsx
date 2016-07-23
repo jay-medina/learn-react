@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ThreadNode from './threadNode.tsx';
 import PostButton from './postButton.tsx';
 
 import {ActionTypes} from '../reducers/ThreadReducer.ts';
@@ -45,11 +44,11 @@ class ThreadReply extends React.Component<ThreadReplyProps, ThreadReplyState> {
   }
   renderInitialView() {
     return (
-      <ThreadNode className="threadReply start">
+      <div className="threadReply start">
         <div onClick={this.activateReply.bind(this)} className="thread__replyInput">
           Write a Reply
         </div>
-      </ThreadNode>
+      </div>
     );
   }
   renderAfterClickView() {

@@ -18,17 +18,16 @@ class ThreadNode extends React.Component<ThreadNodeProps, {}> {
     if(person && timestamp) {
       return (
         <div className="nodeTitle">
-         <div className="personName">
-          <span className="nodePerson">{person}</span> - 
-          <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
-         </div>
-         <div className="deleteThread">
-           Delete
-         </div>
+          <div className="personName">
+            <span className="nodePerson">{person}</span> - 
+            <span className="nodeTimestamp">{DateHelper.formatDate(timestamp)}</span>
+          </div>
+          <div className="deleteThread">
+            Delete
+          </div>
         </div>
       )
     }
-    return <span></span>;
   }
   render() {
     return (
