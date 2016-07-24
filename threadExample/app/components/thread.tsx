@@ -13,7 +13,10 @@ export interface ThreadProps {
 
 class Thread extends React.Component<ThreadProps, {}> {
   renderFirst(node) {
-    return <ThreadHeader person={node.person} timestamp={node.timestamp}>{node.text}</ThreadHeader>;
+    return <ThreadHeader person={node.person} 
+                         timestamp={node.timestamp}
+                         onDeleteClicked={this.onDeleteClicked(node)}
+                         >{node.text}</ThreadHeader>;
   }
   onDeleteClicked(node) {
     return () => this.props.dispatch({
