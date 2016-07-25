@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {Todo, ActionTypes} from '../reducers/todosReducer.ts';
+import {Todo} from '../reducers/todosReducer.ts';
 import TodoList from './TodoList.tsx';
 import AddTodo from './AddTodo.tsx';
 import Footer from './Footer.tsx';
+import {addTodo, toggleTodo, setVisibilityFilter} from '../actionCreators.ts';
 
 export interface TodoProps {
   dispatch: (any) => void,
@@ -10,45 +11,16 @@ export interface TodoProps {
   filter: string
 }
 
-let id = 0;
+function TodoAppView<TodoProps>(props) {
+  const {filter:selected, dispatch} = props;
 
-class TodoAppView extends React.Component<TodoProps, {}> {
-  constructor() {
-    super();
-    
-    this.addTodo = this.addTodo.bind(this);
-    this.toggleTodo = this.toggleTodo.bind(this);
-    this.setVisibilityFilter = this.setVisibilityFilter.bind(this);
-  }
-  addTodo(text) {
-    this.props.dispatch({
-      text,
-      type: ActionTypes.ADD_TODO,
-      id: id++
-    });
-  }
-  toggleTodo(id) {
-    this.props.dispatch({
-      id,
-      type: ActionTypes.TOGGLE_TODO
-    });
-  }
-  setVisibilityFilter(filter) {
-    this.props.dispatch({
-      filter,
-      type: 'SET_VISIBILITY_FILTER'
-    });
-  }
-  render() {
-    const {filter:selected} = this.props;
-    return (
-      <div>
-        <AddTodo addTodo={this.addTodo} />
-        <TodoList {...this.props} toggleTodo={this.toggleTodo} />
-        <Footer selected={selected} setVisibilityFilter={this.setVisibilityFilter}/>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <AddTodo addTodo={(text) => dispatch(addTodo(text))} />
+      <TodoList {...props} toggleTodo={(id) => dispatch(toggleTodo(id))} />
+      <Footer selected={selected} setVisibilityFilter={(filter) => dispatch(setVisibilityFilter(filter))}/>
+    </div>
+  )
 }
 
 export default TodoAppView;
