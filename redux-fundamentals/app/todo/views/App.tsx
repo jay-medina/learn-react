@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ActionTypes from '../reducers/ActionTypes.ts';
 
 let id = 0;
 
@@ -25,15 +26,27 @@ class TodoApp extends React.Component<TodoAppProps,TodoAppState> {
   }
   addTodo() {
     this.props.dispatch({
-            type: 'ADD_TODO',
+            type: ActionTypes.ADD_TODO,
             text: this.state.inputValue,
             id: id++
           });
     this.setState({inputValue: ''});
   }
+  toggleTodo(id) {
+    this.props.dispatch({
+      id,
+      type: ActionTypes.TOGGLE_TODO
+    })
+  }
+  getTodoItemClassName(todo) {
+    return todo.completed? 'completed todoItem' : 'todoItem';
+  }
   renderTodoList() {
     return this.props.todos.map(todo => {
-      return <li key={todo.id}>{todo.text}</li>
+      return <li key={todo.id} onClick={this.toggleTodo.bind(this, todo.id)} 
+                 className={this.getTodoItemClassName(todo)}>
+              {todo.text}
+             </li>
     })
   }
   render() {
