@@ -1,3 +1,5 @@
+import {combineReducers, Action} from 'redux';
+
 import TodoListReducer from './TodoListReducer.ts';
 import VisibilityFilterReducer from './VisibilityFilterReducer.ts';
 
@@ -6,11 +8,9 @@ export interface TodoAppState {
   visibilityFilter: string
 }
 
-function TodoAppReducer(state = {} as TodoAppState, action) {
-  return {
-    todos: TodoListReducer(state.todos, action),
-    visibilityFilter: VisibilityFilterReducer(state.visibilityFilter, action)
-  }
-}
+const TodoAppReducer = combineReducers<TodoAppState>({
+  todos: TodoListReducer,
+  visibilityFilter: VisibilityFilterReducer
+});
 
 export default TodoAppReducer;
