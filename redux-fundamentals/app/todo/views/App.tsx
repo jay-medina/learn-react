@@ -1,10 +1,12 @@
 import * as React from 'react';
 import ActionTypes from '../reducers/ActionTypes.ts';
+import FilterLink from './FilterLink.tsx';
 
 let id = 0;
 
 export interface TodoAppProps {
   todos: any[],
+  visibilityFilter: string,
   dispatch: (any) => void
 }
 
@@ -41,22 +43,45 @@ class TodoApp extends React.Component<TodoAppProps,TodoAppState> {
   getTodoItemClassName(todo) {
     return todo.completed? 'completed todoItem' : 'todoItem';
   }
-  renderTodoList() {
-    return this.props.todos.map(todo => {
+  getVisibleTodos(todos, filter) {
+    switch(filter) {
+      case 'SHOW_ALL': return todos;
+      case 'SHOW_ACTIVE': return todos.filter(t => !t.completed);
+      case 'SHOW_COMPLETED': return todos.filter(t => t.completed);
+    }
+
+    return todos;
+  }
+  renderTodoList(todos) {
+    return todos.map(todo => {
       return <li key={todo.id} onClick={this.toggleTodo.bind(this, todo.id)} 
                  className={this.getTodoItemClassName(todo)}>
               {todo.text}
              </li>
     })
   }
+  renderFilterLinks(currentFilter) {
+    return (
+      <p>
+        Show:
+        <FilterLink currentFilter={currentFilter} filter='SHOW_ALL' dispatch={this.props.dispatch}>All</FilterLink>
+        <FilterLink currentFilter={currentFilter} filter='SHOW_ACTIVE' dispatch={this.props.dispatch}>Active</FilterLink>
+        <FilterLink currentFilter={currentFilter} filter='SHOW_COMPLETED' dispatch={this.props.dispatch}>Completed</FilterLink>
+      </p>
+    )
+  }
   render() {
+    const {todos, visibilityFilter} = this.props;
+    const visibleTodos = this.getVisibleTodos(todos, visibilityFilter);
+
     return (
       <div>
         <input value={this.state.inputValue} onChange={this.updateInputValue.bind(this)} />
         <button onClick={this.addTodo.bind(this)}>Add Todo</button>
         <ul>
-          {this.renderTodoList()}
+          {this.renderTodoList(visibleTodos)}
         </ul>
+        {this.renderFilterLinks(visibilityFilter)}
       </div>
     )
   }

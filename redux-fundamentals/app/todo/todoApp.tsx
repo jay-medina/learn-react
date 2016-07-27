@@ -9,9 +9,9 @@ export function initialize() {
   const store = createStore(TodoAppReducer);
 
   function print() {
-
     ReactDOM.render(
-      <App todos={store.getState().todos} dispatch={store.dispatch}/>, 
+      <App {...store.getState()}
+           dispatch={store.dispatch}/>, 
       document.getElementById('todoApp')
     );
   }
