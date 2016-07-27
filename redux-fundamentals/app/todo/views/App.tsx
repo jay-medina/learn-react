@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ActionTypes from '../reducers/ActionTypes.ts';
 import FilterLink from './FilterLink.tsx';
+import TodoList from './TodoList.tsx';
 
 let id = 0;
 
@@ -40,9 +41,6 @@ class TodoApp extends React.Component<TodoAppProps,TodoAppState> {
       type: ActionTypes.TOGGLE_TODO
     })
   }
-  getTodoItemClassName(todo) {
-    return todo.completed? 'completed todoItem' : 'todoItem';
-  }
   getVisibleTodos(todos, filter) {
     switch(filter) {
       case 'SHOW_ALL': return todos;
@@ -51,14 +49,6 @@ class TodoApp extends React.Component<TodoAppProps,TodoAppState> {
     }
 
     return todos;
-  }
-  renderTodoList(todos) {
-    return todos.map(todo => {
-      return <li key={todo.id} onClick={this.toggleTodo.bind(this, todo.id)} 
-                 className={this.getTodoItemClassName(todo)}>
-              {todo.text}
-             </li>
-    })
   }
   renderFilterLinks(currentFilter) {
     return (
@@ -78,9 +68,8 @@ class TodoApp extends React.Component<TodoAppProps,TodoAppState> {
       <div>
         <input value={this.state.inputValue} onChange={this.updateInputValue.bind(this)} />
         <button onClick={this.addTodo.bind(this)}>Add Todo</button>
-        <ul>
-          {this.renderTodoList(visibleTodos)}
-        </ul>
+        <TodoList todos={visibleTodos} onTodoClick={this.toggleTodo.bind(this)} />
+        
         {this.renderFilterLinks(visibilityFilter)}
       </div>
     )

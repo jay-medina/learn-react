@@ -21,7 +21,7 @@ class FilterLink extends React.Component<FilterLinkProps, any> {
     const { filter, currentFilter, children } = this.props;
 
     if(filter === currentFilter) {
-      return <span>{children}</span>
+      return <span className="filterLink">{children}</span>
     }
 
     return (
