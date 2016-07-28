@@ -1,40 +1,25 @@
 import * as React from 'react';
-import TodoItem from './TodoItem.tsx';
-import {Todo} from '../reducers/todosReducer.ts';
+import Todo from './Todo.tsx';
 
 export interface TodoListProps {
-  toggleTodo: (id) => void,
-  todos: Todo[],
-  filter: string
-} 
+  todos: any[],
+  onTodoClick: (any) => void
+}
+class TodoList extends React.Component<TodoListProps,{}> {
+  renderTodoList() {
+    const {todos} = this.props;
 
-class TodoListView extends React.Component<TodoListProps, {}> {
-  getFilteredTodos() {
-    const {todos, filter} = this.props;
-
-    switch(filter) {
-      case 'SHOW_ALL': return todos;
-      case 'SHOW_COMPLETED': return todos.filter(todo => todo.completed);
-      case 'SHOW_ACTIVE': return todos.filter(todo => !todo.completed);
-    }
-  }
-  renderTodos() {
-    return this.getFilteredTodos().map(todo => {
-      return <TodoItem key={todo.id} 
-                           id={todo.id} 
-                           onClick={this.props.toggleTodo.bind(this)}
-                           completed={todo.completed}>
-                {todo.text}
-             </TodoItem>
-    })
+    return todos.map(todo => <Todo key={todo.id} 
+                                   onClick={() => this.props.onTodoClick(todo.id)}
+                             {...todo} /> )
   }
   render() {
     return (
-      <ul className="todos">
-          {this.renderTodos()}
+      <ul>
+          {this.renderTodoList()}
       </ul>
     );
   }
 }
 
-export default TodoListView;
+export default TodoList;

@@ -1,26 +1,24 @@
 import * as React from 'react';
-import {Todo} from '../reducers/todosReducer.ts';
-import TodoList from './TodoList.tsx';
-import AddTodo from './AddTodo.tsx';
-import Footer from './Footer.tsx';
-import {addTodo, toggleTodo, setVisibilityFilter} from '../actionCreators.ts';
 
 export interface TodoProps {
-  dispatch: (any) => void,
-  todos: Todo[],
-  filter: string
+  onClick: () => void,
+  id: number,
+  completed: boolean,
+  text: string
 }
 
-function TodoAppView<TodoProps>(props) {
-  const {filter:selected, dispatch} = props;
-
-  return (
-    <div>
-      <AddTodo addTodo={(text) => dispatch(addTodo(text))} />
-      <TodoList {...props} toggleTodo={(id) => dispatch(toggleTodo(id))} />
-      <Footer selected={selected} setVisibilityFilter={(filter) => dispatch(setVisibilityFilter(filter))}/>
-    </div>
-  )
+class Todo extends React.Component<TodoProps,{}> {
+  getTodoItemClassName() {
+    return this.props.completed? 'completed todoItem' : 'todoItem';
+  }
+  render() {
+    return (
+      <li onClick={this.props.onClick} 
+          className={this.getTodoItemClassName()}>
+          {this.props.text}
+      </li>
+    );
+  }
 }
 
-export default TodoAppView;
+export default Todo;
