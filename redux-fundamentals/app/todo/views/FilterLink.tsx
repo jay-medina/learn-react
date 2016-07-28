@@ -4,18 +4,13 @@ import ActionTypes from '../reducers/ActionTypes.ts';
 export interface FilterLinkProps {
   filter: string,
   currentFilter: string,
-  dispatch: (any) => void
+  onClick: (string) => void
 }
 
 class FilterLink extends React.Component<FilterLinkProps, any> {
   onClick(e) {
     e.preventDefault();
-    const {dispatch, filter} = this.props;
-
-    dispatch({
-      filter,
-      type: ActionTypes.SET_VISIBILITY_FILTER
-    });
+    this.props.onClick(this.props.filter);
   }
   render() {
     const { filter, currentFilter, children } = this.props;
