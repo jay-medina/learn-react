@@ -13,9 +13,9 @@ class Footer extends React.Component<FooterProps,{}> {
     return (
       <p>
         Show:
-        <FilterLink currentFilter={visibilityFilter} filter='SHOW_ALL' onClick={onFilterClick}>All</FilterLink>
-        <FilterLink currentFilter={visibilityFilter} filter='SHOW_ACTIVE' onClick={onFilterClick}>Active</FilterLink>
-        <FilterLink currentFilter={visibilityFilter} filter='SHOW_COMPLETED' onClick={onFilterClick}>Completed</FilterLink>
+        <FilterLink filter='SHOW_ALL' visibilityFilter={visibilityFilter} onClick={onFilterClick}>All</FilterLink>
+        <FilterLink filter='SHOW_ACTIVE' visibilityFilter={visibilityFilter} onClick={onFilterClick}>Active</FilterLink>
+        <FilterLink filter='SHOW_COMPLETED' visibilityFilter={visibilityFilter} onClick={onFilterClick}>Completed</FilterLink>
       </p>
     );
   }

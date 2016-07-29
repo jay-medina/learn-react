@@ -1,5 +1,9 @@
 import ActionTypes from './ActionTypes.ts';
 
+declare module Object {
+  function assign({}, ...args);
+}
+
 function addTodo(state, action) {
   const {id, text} = action;
 

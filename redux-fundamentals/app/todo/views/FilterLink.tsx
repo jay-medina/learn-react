@@ -1,10 +1,11 @@
 import * as React from 'react';
 import ActionTypes from '../reducers/ActionTypes.ts';
+import Link from './Link.tsx';
 
 export interface FilterLinkProps {
   filter: string,
-  currentFilter: string,
   onClick: (string) => void
+  visibilityFilter: string,
 }
 
 class FilterLink extends React.Component<FilterLinkProps, any> {
@@ -13,15 +14,10 @@ class FilterLink extends React.Component<FilterLinkProps, any> {
     this.props.onClick(this.props.filter);
   }
   render() {
-    const { filter, currentFilter, children } = this.props;
-
-    if(filter === currentFilter) {
-      return <span className="filterLink">{children}</span>
-    }
-
+    const {filter, visibilityFilter, children} = this.props;
     return (
-      <a href="#" className="filterLink" onClick={this.onClick.bind(this)}>{children}</a>
-    );
+      <Link active={filter === visibilityFilter} onClick={this.onClick.bind(this)}>{children}</Link>
+    )
   }
 }
 
