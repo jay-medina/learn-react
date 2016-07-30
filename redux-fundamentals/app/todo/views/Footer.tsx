@@ -3,19 +3,17 @@ import FilterLink from './FilterLink.tsx';
 
 export interface FooterProps {
   visibilityFilter: string,
-  onFilterClick: (string) => void
+  dispatch: (any) => void
 }
 
 class Footer extends React.Component<FooterProps,{}> {
   render() {
-    const {onFilterClick, visibilityFilter} = this.props;
-    
     return (
       <p>
         Show:
-        <FilterLink filter='SHOW_ALL' visibilityFilter={visibilityFilter} onClick={onFilterClick}>All</FilterLink>
-        <FilterLink filter='SHOW_ACTIVE' visibilityFilter={visibilityFilter} onClick={onFilterClick}>Active</FilterLink>
-        <FilterLink filter='SHOW_COMPLETED' visibilityFilter={visibilityFilter} onClick={onFilterClick}>Completed</FilterLink>
+        <FilterLink filter='SHOW_ALL' {...this.props}>All</FilterLink>
+        <FilterLink filter='SHOW_ACTIVE' {...this.props}>Active</FilterLink>
+        <FilterLink filter='SHOW_COMPLETED' {...this.props}>Completed</FilterLink>
       </p>
     );
   }

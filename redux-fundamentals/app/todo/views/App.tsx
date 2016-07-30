@@ -39,21 +39,15 @@ class TodoApp extends React.Component<TodoAppProps,{}> {
 
     return todos;
   }
-  setVisibilityFilter(filter) {
-    this.props.dispatch({
-      filter,
-      type: ActionTypes.SET_VISIBILITY_FILTER
-    });
-  }
   render() {
-    const {todos, visibilityFilter} = this.props;
+    const {todos, visibilityFilter, dispatch} = this.props;
     const visibleTodos = this.getVisibleTodos(todos, visibilityFilter);
 
     return (
       <div>
         <AddTodo onAddClick={this.addTodo.bind(this)}/>
         <TodoList todos={visibleTodos} onTodoClick={this.toggleTodo.bind(this)} />
-        <Footer visibilityFilter={visibilityFilter} onFilterClick={this.setVisibilityFilter.bind(this)}/>
+        <Footer {...this.props}/>
       </div>
     )
   }

@@ -4,19 +4,22 @@ import Link from './Link.tsx';
 
 export interface FilterLinkProps {
   filter: string,
-  onClick: (string) => void
+  dispatch: (any) => void,
   visibilityFilter: string,
 }
 
 class FilterLink extends React.Component<FilterLinkProps, any> {
-  onClick(e) {
-    e.preventDefault();
-    this.props.onClick(this.props.filter);
+  setVisibilityFilter() {
+    const {dispatch, filter} = this.props;
+    dispatch({
+      filter,
+      type: ActionTypes.SET_VISIBILITY_FILTER
+    });
   }
   render() {
     const {filter, visibilityFilter, children} = this.props;
     return (
-      <Link active={filter === visibilityFilter} onClick={this.onClick.bind(this)}>{children}</Link>
+      <Link active={filter === visibilityFilter} onClick={this.setVisibilityFilter.bind(this)}>{children}</Link>
     )
   }
 }
