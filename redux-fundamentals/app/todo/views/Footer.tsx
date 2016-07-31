@@ -2,8 +2,7 @@ import * as React from 'react';
 import FilterLink from './FilterLink.tsx';
 
 export interface FooterProps {
-  visibilityFilter: string,
-  dispatch: (any) => void
+  store: any
 }
 
 class Footer extends React.Component<FooterProps,{}> {
