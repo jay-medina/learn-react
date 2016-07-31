@@ -1,12 +1,15 @@
 import * as React from 'react';
+import ActionTypes from '../reducers/ActionTypes.ts';
 
 export interface AddTodoProps {
-  onAddClick: (string) => void
+  store: any
 }
 
 export interface AddTodoState {
   inputValue: string
 }
+
+let id = 0;
 
 class AddTodo extends React.Component<AddTodoProps,AddTodoState> {
   constructor() {
@@ -22,8 +25,13 @@ class AddTodo extends React.Component<AddTodoProps,AddTodoState> {
     this.setState({inputValue: e.target.value});
   }
 
-  onClick() {
-    this.props.onAddClick(this.state.inputValue);
+  addTodo() {
+    this.props.store.dispatch({
+      text: this.state.inputValue,
+      type: ActionTypes.ADD_TODO,
+      id: id++
+    });
+
     this.setState({inputValue: ''});
   }
 
@@ -31,7 +39,7 @@ class AddTodo extends React.Component<AddTodoProps,AddTodoState> {
     return (
       <div>
         <input value={this.state.inputValue} onChange={this.updateInputValue.bind(this)} />
-        <button onClick={this.onClick.bind(this)}>Add Todo</button>
+        <button onClick={this.addTodo.bind(this)}>Add Todo</button>
       </div>
     )
   }

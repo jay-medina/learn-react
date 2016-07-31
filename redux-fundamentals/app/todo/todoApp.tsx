@@ -10,8 +10,7 @@ export function initialize() {
 
   function print() {
     ReactDOM.render(
-      <App {...store.getState()}
-           dispatch={store.dispatch}/>, 
+      <App store={store}/>, 
       document.getElementById('todoApp')
     );
   }
