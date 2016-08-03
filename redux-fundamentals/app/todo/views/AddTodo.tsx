@@ -1,17 +1,17 @@
 import * as React from 'react';
 import ActionTypes from '../reducers/ActionTypes.ts';
 
-export interface AddTodoProps {
-  store: any
-}
-
 export interface AddTodoState {
   inputValue: string
 }
 
 let id = 0;
 
-class AddTodo extends React.Component<AddTodoProps,AddTodoState> {
+class AddTodo extends React.Component<any,AddTodoState> {
+  static contextTypes = {
+    store: React.PropTypes.object
+  };
+  
   constructor() {
     super();
 
@@ -26,7 +26,7 @@ class AddTodo extends React.Component<AddTodoProps,AddTodoState> {
   }
 
   addTodo() {
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       text: this.state.inputValue,
       type: ActionTypes.ADD_TODO,
       id: id++

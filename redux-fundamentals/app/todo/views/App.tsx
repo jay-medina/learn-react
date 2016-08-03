@@ -3,16 +3,12 @@ import AddTodo from './AddTodo.tsx';
 import Footer from './Footer.tsx';
 import VisibleTodoList from './VisibleTodoList.tsx';
 
-export interface TodoAppProps {
-  store: any
-}
-
-function TodoApp<TodoAppProps>(props) {
+function TodoApp() {
     return (
       <div>
-        <AddTodo {...props}/>
-        <VisibleTodoList {...props} />
-        <Footer {...props}/>
+        <AddTodo />
+        <VisibleTodoList />
+        <Footer />
       </div>
     )
 }
