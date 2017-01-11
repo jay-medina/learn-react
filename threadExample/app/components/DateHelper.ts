@@ -26,6 +26,4 @@ function formatDate(timestamp) {
   
 }
 
-export {
-  formatDate
-};
+export default {formatDate};

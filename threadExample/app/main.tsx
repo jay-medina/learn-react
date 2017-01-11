@@ -2,9 +2,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 
-import MultiThreadReducer from './reducers/MultiThreadReducer.ts';
+import MultiThreadReducer from './reducers/MultiThreadReducer';
 
-import { App } from './components/app.tsx';
+import { App } from './components/app';
 const store = createStore(MultiThreadReducer);
 const person = 'Jose Medina';
 

@@ -1,5 +1,5 @@
 import {Action} from 'redux';
-import ThreadReducer, {ThreadAction, ActionTypes as TActionTypes} from './ThreadReducer.ts';
+import ThreadReducer, {ThreadAction, ActionTypes as TActionTypes} from './ThreadReducer';
 var THREAD_ID = 0;
 var POST_ID = 0;
 

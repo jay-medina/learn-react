@@ -1,8 +1,14 @@
 module.exports = {
-  entry: './app/main.tsx',
+  entry: {
+    app: './app/main.tsx',
+  },
   output: {
-    path: './dist/',
+    path: 'dist',
     filename: 'index.js'
+  },
+  resolve: {
+    // Add `.ts` and `.tsx` as a resolvable extension. 
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   devServer: {
     inline: true,

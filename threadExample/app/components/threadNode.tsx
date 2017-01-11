@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as DateHelper from './DateHelper.ts';
+import DateHelper from './DateHelper';
 
 export interface ThreadNodeProps {
   className?: string,

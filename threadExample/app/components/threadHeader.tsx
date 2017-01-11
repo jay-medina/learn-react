@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ThreadNode from './threadNode.tsx';
+import ThreadNode from './threadNode';
 
 export interface ThreadHeaderProps {
   person: string,

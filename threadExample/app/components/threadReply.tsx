@@ -1,7 +1,7 @@
 import * as React from 'react';
-import PostButton from './postButton.tsx';
+import PostButton from './postButton';
 
-import {ActionTypes} from '../reducers/ThreadReducer.ts';
+import {ActionTypes} from '../reducers/ThreadReducer';
 
 export interface ThreadReplyProps {
   dispatch: (any) => void,

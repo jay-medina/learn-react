@@ -1,8 +1,8 @@
 import * as React from 'react';
-import ThreadNode from './threadNode.tsx';
-import PostButton from './postButton.tsx';
+import ThreadNode from './threadNode';
+import PostButton from './postButton';
 
-import {ActionTypes} from '../reducers/MultiThreadReducer.ts';
+import {ActionTypes} from '../reducers/MultiThreadReducer';
 
 export interface ThreadStarterProps {
   dispatch: (any) => void,

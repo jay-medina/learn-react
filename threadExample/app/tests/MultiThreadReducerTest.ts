@@ -1,5 +1,5 @@
-import MultiThreadReducer, {MultiThreadAction, ActionTypes} from '../reducers/MultiThreadReducer.ts';
-import {ActionTypes as TActionTypes} from '../reducers/ThreadReducer.ts';
+import MultiThreadReducer, {MultiThreadAction, ActionTypes} from '../reducers/MultiThreadReducer';
+import {ActionTypes as TActionTypes} from '../reducers/ThreadReducer';
 
 export function execute() {
   var timestamp = 1468613933179;

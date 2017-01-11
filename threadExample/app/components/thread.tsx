@@ -1,8 +1,8 @@
 import * as React from 'react';
-import ThreadHeader from './threadHeader.tsx';
-import ThreadBody from './threadBody.tsx';
-import ThreadNode from './threadNode.tsx';
-import ThreadReply from './threadReply.tsx';
+import ThreadHeader from './threadHeader';
+import ThreadBody from './threadBody';
+import ThreadNode from './threadNode';
+import ThreadReply from './threadReply';
 
 export interface ThreadProps {
   thread_id: string,

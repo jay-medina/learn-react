@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Thread from './thread.tsx';
-import ThreadStarter from './threadStarter.tsx';
+import Thread from './thread';
+import ThreadStarter from './threadStarter';
 
 
 export interface AppProps {
