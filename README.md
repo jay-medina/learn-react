@@ -12,3 +12,6 @@ Test Project using React, TypeScript, Redux and Webpack.
 Lessons are based off of [React Fundamentals](https://egghead.io/courses/react-fundamentals)
 
 Here is a link to the [Project](/react-fundamentals)
+
+## React Training
+Lessons from [React Training Exercises](https://online.reacttraining.com/courses/reactjsfundamentals)
