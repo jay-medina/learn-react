@@ -1,5 +1,6 @@
 var React = require('react');
 var ConfirmBattle = require('../components/ConfirmBattle');
+const { getPlayersInfo } = require('../util/githubHelpers');
 
 var ConfirmBattleContainer = React.createClass({
   getInitialState() {
@@ -15,9 +16,14 @@ var ConfirmBattleContainer = React.createClass({
     )
   },
   componentDidMount() {
-    var query = this.props.location.query;
-    console.log('Query', query);
-    //Fetch info from github
+    const {playerOne, playerTwo} = this.props.location.query;
+
+    getPlayersInfo([playerOne, playerTwo]).then(playerInfo => {
+      this.setState({
+        isLoading: false,
+        playerInfo: [...playerInfo]
+      })
+    })
   }
 })
 
