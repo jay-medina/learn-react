@@ -1,7 +1,9 @@
+const path = require('path');
+
 module.exports = {
   entry: './app/index.js',
   output: {
-    path: './dist/',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
   },
   devServer: {
@@ -13,7 +15,7 @@ module.exports = {
       {
         test: /.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react']
         }
