@@ -1,42 +1,71 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Square extends React.Component {
-  render() {
-    return (
-      <button className="square">
-        {/* TODO */}
-      </button>
-    );
-  }
+function Square(props) {
+  return (
+    <button className="square" onClick={() => props.onClick()}>
+      {props.value}
+    </button>
+  );
+}
+
+function BoardView (props) {
+  return (
+    <div>
+      <div className="status">{props.status}</div>
+      <div className="board-row">
+        {props.renderSquare(0)}
+        {props.renderSquare(1)}
+        {props.renderSquare(2)}
+      </div>
+      <div className="board-row">
+        {props.renderSquare(3)}
+        {props.renderSquare(4)}
+        {props.renderSquare(5)}
+      </div>
+      <div className="board-row">
+        {props.renderSquare(6)}
+        {props.renderSquare(7)}
+        {props.renderSquare(8)}
+      </div>
+    </div>
+  );
 }
 
 class Board extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true
+    }
+  }
+  getNextValue() {
+    return this.state.xIsNext? 'X': 'O';
+  }
+  getStatus() {
+    const status = `Next player: ${this.getNextValue()}`;
+    const winner = calculateWinner(this.state.squares)
+    if(winner) {
+      return `Winner: ${winner}`;
+    }
+    
+    return status;
+  }
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    if(calculateWinner(squares) || squares[i]){
+      return;
+    }
+
+    squares[i] = this.getNextValue();
+    this.setState({squares: squares, xIsNext: !this.state.xIsNext});
+  }
   renderSquare(i) {
-    return <Square />;
+    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)}/>;
   }
   render() {
-    const status = 'Next player: X';
-    return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
+    return <BoardView status={this.getStatus()} renderSquare={this.renderSquare.bind(this)} />
   }
 }
 
