@@ -70,13 +70,25 @@ class Game extends React.Component {
     }
 
     squares[i] = this.getNextValue();
-    this.setState({ 
+    this.setState({
       history: this.state.history.concat([
         {
           squares: squares
         }
       ]),
-      xIsNext: !this.state.xIsNext 
+      xIsNext: !this.state.xIsNext
+    });
+  }
+  renderMoves() {
+    return this.state.history.map((step, move) => {
+      const desc = move ?
+        'Move #' + move :
+        'Game start';
+      return (
+        <li key={move}>
+          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+        </li>
+      );
     });
   }
   render() {
@@ -85,11 +97,11 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-board">
-          <Board squares={current.squares} onClick={this.handleClick.bind(this)}/>
+          <Board squares={current.squares} onClick={this.handleClick.bind(this)} />
         </div>
         <div className="game-info">
           <div>{this.getStatus(current.squares)}</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{this.renderMoves()}</ol>
         </div>
       </div>
     );
