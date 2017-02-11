@@ -43,6 +43,7 @@ class Game extends React.Component {
       history: [{
         squares: Array(9).fill(null)
       }],
+      stepNumber: 0,
       xIsNext: true
     }
   }
@@ -60,7 +61,7 @@ class Game extends React.Component {
   }
   getCurrentBoard() {
     const {history} = this.state;
-    return history[history.length - 1];
+    return history[this.state.stepNumber];
   }
   handleClick(i) {
     const current = this.getCurrentBoard();
@@ -76,8 +77,15 @@ class Game extends React.Component {
           squares: squares
         }
       ]),
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
+      stepNumber: this.state.stepNumber + 1
     });
+  }
+  jumpTo(step) {
+    this.setState({
+      stepNumber: step,
+      xIsNext: (step % 2) ? false : true
+    })
   }
   renderMoves() {
     return this.state.history.map((step, move) => {
