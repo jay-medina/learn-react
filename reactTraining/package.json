@@ -1,7 +1,7 @@
 {
   "name": "react-training",
   "version": "1.0.0",
-  "description": "",
+  "description": "project from reacttraining.com",
   "main": "index.js",
   "scripts": {
     "production": "webpack -p",
