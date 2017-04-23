@@ -4,8 +4,8 @@
   "description": "project from reacttraining.com",
   "main": "index.js",
   "scripts": {
-    "production": "webpack -p",
-    "start": "webpack-dev-server",
+    "create": "webpack -p",
+    "start": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "josemedina921@gmail.com",
