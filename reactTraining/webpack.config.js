@@ -7,7 +7,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js'
   },
-  extensions: ['','js','jsx'],
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {test: /\.jsx?$/, use: 'babel-loader', exclude: ['node_modules']},
