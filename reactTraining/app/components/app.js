@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React from 'react';
+import Popular from './popular';
 
 class App extends React.PureComponent {
   render() {
     return (
       <div>
-        Hello react training!
+        <Popular />
       </div>
     );
   }
