@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './app';
-import Badge from './badge';
+import Popular from './popular';
 
 describe('<App />', function () {
   let component;

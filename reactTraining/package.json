@@ -6,7 +6,8 @@
   "scripts": {
     "create": "webpack -p",
     "start": "webpack-dev-server --open",
-    "test": "jest"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "author": "josemedina921@gmail.com",
   "license": "ISC",
@@ -34,6 +35,7 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
-    }
+    },
+    "coverageReporters": ["text", "text-summary"]
   }
 }
