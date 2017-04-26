@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Popular from './popular';
 
 describe('<Popular />', function () {
   let component;
   beforeEach(function() {
-    component = shallow(
+    component = mount(
       <Popular />
     );
   });
