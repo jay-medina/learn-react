@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { fetchPopularRepos } from '../utils/api';
 
 function SelectedLanguage(props) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
@@ -29,21 +30,40 @@ class Popular extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      selectedLanguage: 'All'
+      selectedLanguage: 'All',
+      repos: [],
     };
-    this.onLanguageClick = this.onLanguageClick.bind(this);
+    this.updateLanguage = this.updateLanguage.bind(this);
+    this.displayRepos = this.displayRepos.bind(this);
   }
-  onLanguageClick(language) {
+  componentDidMount () {
+    this.updateLanguage(this.state.selectedLanguage);
+  }
+  updateLanguage(language) {
     this.setState(() => {
       return {
         selectedLanguage: language
       };
-    })
+    });
+
+    fetchPopularRepos(language).then((repos) => {
+      this.setState(() => {
+        return {
+          repos
+        }
+      });
+    });
+  }
+  displayRepos() {
+    return this.state.repos.map((repo, index) => {
+      return <li key={index}>{repo.git_url}</li>
+    });
   }
   render() {
     return (
       <div>
-        <SelectedLanguage selected={this.state.selectedLanguage} onSelect={this.onLanguageClick} />
+        <SelectedLanguage selected={this.state.selectedLanguage} onSelect={this.updateLanguage} />
+        {this.displayRepos()}
       </div>
     );
   }
