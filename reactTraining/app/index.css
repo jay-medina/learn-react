@@ -29,3 +29,35 @@ li {
 .languages .active {
   color: #D0021B;
 }
+
+.popular-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.popular-item {
+  margin: 20px;
+  text-align: center;
+}
+
+.space-list-items {
+  margin-bottom: 7px;
+}
+
+.popular-rank {
+  font-size: 20px;
+  margin: 10px;
+  position:relative;
+  left: -5px;
+}
+
+.avatar {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.popular-item-link {
+  color: #D0021B;
+  text-decoration: none;
+}

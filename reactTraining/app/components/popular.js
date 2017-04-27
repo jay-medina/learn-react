@@ -26,15 +26,40 @@ SelectedLanguage.propTypes = {
   onSelect: PropTypes.func.isRequired,
 }
 
+function RepoGrid(props) {
+  return (
+    <ul className='popular-list'>
+      {
+        props.repos.map((repo, index) => {
+          return (
+            <li key={repo.name} className='popular-item'>
+              <div className='popular-rank'>#{index + 1}</div>
+              <ul className="space-list-items">
+                <li><img src={repo.owner.avatar_url} className='avatar' alt={`Avatar for ${repo.owner.login}`}/></li>
+                <li><a href={repo.html_url} className="popular-item-link">{repo.name}</a></li>
+                <li>@{repo.owner.login}</li>
+                <li>{repo.stargazers_count} stars</li>
+              </ul>
+            </li>
+          );
+        })
+      }
+    </ul>
+  )
+}
+
+RepoGrid.propTypes = {
+  repos: PropTypes.array.isRequired,
+};
+
 class Popular extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       selectedLanguage: 'All',
-      repos: [],
+      repos: null,
     };
     this.updateLanguage = this.updateLanguage.bind(this);
-    this.displayRepos = this.displayRepos.bind(this);
   }
   componentDidMount () {
     this.updateLanguage(this.state.selectedLanguage);
@@ -54,16 +79,14 @@ class Popular extends React.PureComponent {
       });
     });
   }
-  displayRepos() {
-    return this.state.repos.map((repo, index) => {
-      return <li key={index}>{repo.git_url}</li>
-    });
-  }
   render() {
     return (
       <div>
         <SelectedLanguage selected={this.state.selectedLanguage} onSelect={this.updateLanguage} />
-        {this.displayRepos()}
+        {!this.state.repos ?
+          <p>LOADING</p> :
+          <RepoGrid repos={this.state.repos} />
+        }
       </div>
     );
   }
