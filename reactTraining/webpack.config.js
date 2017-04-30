@@ -6,7 +6,8 @@ module.exports = {
   entry: './app/index.js',
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   devtool: 'inline-source-map',
   module: {
@@ -14,6 +15,12 @@ module.exports = {
       {test: /\.jsx?$/, use: 'babel-loader', exclude: ['node_modules']},
       {test: /\.css$/, use: ['style-loader', 'css-loader']}
     ]
+  },
+  devServer: {
+    historyApiFallback: true
+  },
+  resolve: {
+    extensions: ['.js','.jsx']
   },
   plugins: [
     new HtmlWebpackPlugin({
