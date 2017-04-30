@@ -57,7 +57,48 @@ li {
   border-radius: 50%;
 }
 
-.popular-item-link {
+a {
   color: #D0021B;
   text-decoration: none;
+}
+
+.nav {
+  display:flex;
+}
+
+.nav li {
+  margin-right: 15px;
+}
+
+.home-container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.button {
+  color: #e6e6e6;
+  background: #0A0A0A;
+  border: none;
+  font-size: 16px;
+  border-radius: 3px;
+  width: 200px;
+  text-align: center;
+  display: block;
+  padding: 7px 0;
+  margin: 10px auto;
+}
+
+.button:hover:enabled {
+  background: linear-gradient(#1a1a1a, #0A0A0A);
+  color: #FFF;
+  text-decoration: none;
+}
+
+.button.active {
+  transform: translateY(1px);
 }
