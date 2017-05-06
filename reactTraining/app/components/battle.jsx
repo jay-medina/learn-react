@@ -12,6 +12,7 @@ class Battle extends React.PureComponent {
       playerTwoImage: '',
     };
     this.updatePlayer = this.updatePlayer.bind(this);
+    this.onReset = this.onReset.bind(this);
   }
   updatePlayer(id, username) {
     this.setState(() => {
@@ -28,6 +29,14 @@ class Battle extends React.PureComponent {
       return input;
     }
   }
+  onReset({id}) {
+    this.setState(() => {
+      return {
+        [id]: '',
+        [id + 'Image']: '',
+      };
+    });
+  }
   render() {
     const {playerOne, playerTwo, playerOneImage, playerTwoImage} = this.state;
 
@@ -38,14 +47,18 @@ class Battle extends React.PureComponent {
             this.renderPlayer(
               playerOne, 
               <PlayerInput id="playerOne" name={'Player One'} updatePlayer={this.updatePlayer} />,
-              <PlayerInfo playerName={playerOne} playerImage={playerOneImage} />,
+              <PlayerInfo id="playerOne" playerName={playerOne} playerImage={playerOneImage} onReset={this.onReset} />,
             )
           }
           {
             this.renderPlayer(
               playerTwo, 
               <PlayerInput id="playerTwo" name={'Player Two'} updatePlayer={this.updatePlayer} />,
-              <PlayerInfo playerName={playerTwo} playerImage={playerTwoImage} />,
+              <PlayerInfo 
+                id="playerTwo"
+                playerName={playerTwo} 
+                playerImage={playerTwoImage} 
+                onReset={this.onReset} />,
             )
           }
         </div>
