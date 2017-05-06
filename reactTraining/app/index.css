@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 body{
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
 }
@@ -101,4 +104,23 @@ a {
 
 .button.active {
   transform: translateY(1px);
+}
+
+.battle-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.player-container {
+  text-align: center;
+  font-size: 32px;
+}
+
+.input {
+  display: block;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-size: 16px;
+  width: 100%;
 }
