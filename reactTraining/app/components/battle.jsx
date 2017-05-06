@@ -7,19 +7,25 @@ class Battle extends React.PureComponent {
     this.state = {
       playerOne: '',
       playerTwo: '',
+      playerOneImage: '',
+      playerTwoImage: '',
     };
     this.updatePlayerOne = this.updatePlayerOne.bind(this);
     this.updatePlayerTwo = this.updatePlayerTwo.bind(this);
   }
   updatePlayerOne(username) {
-    this.setState(() => {
-      return { playerOne: username };
-    })
+    this.updatePlayer('playerOne', username);
   }
   updatePlayerTwo(username) {
+    this.updatePlayer('playerTwo', username);
+  }
+  updatePlayer(id, username) {
     this.setState(() => {
-      return { playerTwo: username };
-    });
+      return {
+        [id]: username,
+        [id + 'image']: `https://github.com/${username}.png?size=200`,
+      };
+    })
   }
   render() {
     console.log(JSON.stringify(this.state));
