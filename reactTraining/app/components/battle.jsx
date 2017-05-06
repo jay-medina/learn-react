@@ -1,5 +1,6 @@
 import React from 'react';
-import Player from './player';
+import PlayerInput from './playerInput';
+import PlayerInfo from './playerInfo';
 
 class Battle extends React.PureComponent {
   constructor(props) {
@@ -10,29 +11,44 @@ class Battle extends React.PureComponent {
       playerOneImage: '',
       playerTwoImage: '',
     };
-    this.updatePlayerOne = this.updatePlayerOne.bind(this);
-    this.updatePlayerTwo = this.updatePlayerTwo.bind(this);
-  }
-  updatePlayerOne(username) {
-    this.updatePlayer('playerOne', username);
-  }
-  updatePlayerTwo(username) {
-    this.updatePlayer('playerTwo', username);
+    this.updatePlayer = this.updatePlayer.bind(this);
   }
   updatePlayer(id, username) {
     this.setState(() => {
       return {
         [id]: username,
-        [id + 'image']: `https://github.com/${username}.png?size=200`,
+        [id + 'Image']: `https://github.com/${username}.png?size=200`,
       };
     })
   }
+  renderPlayer(player, input, component) {
+    if(player) {
+      return component;
+    } else {
+      return input;
+    }
+  }
   render() {
-    console.log(JSON.stringify(this.state));
+    const {playerOne, playerTwo, playerOneImage, playerTwoImage} = this.state;
+
     return (
-      <div className="battle-container" >
-        <Player name={'Player One'} updatePlayer={this.updatePlayerOne} />
-        <Player name={'Player Two'} updatePlayer={this.updatePlayerTwo}/>
+      <div >
+        <div className="row">
+          {
+            this.renderPlayer(
+              playerOne, 
+              <PlayerInput id="playerOne" name={'Player One'} updatePlayer={this.updatePlayer} />,
+              <PlayerInfo playerName={playerOne} playerImage={playerOneImage} />,
+            )
+          }
+          {
+            this.renderPlayer(
+              playerTwo, 
+              <PlayerInput id="playerTwo" name={'Player Two'} updatePlayer={this.updatePlayer} />,
+              <PlayerInfo playerName={playerTwo} playerImage={playerTwoImage} />,
+            )
+          }
+        </div>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Player extends React.PureComponent {
+class PlayerInput extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,22 +19,27 @@ class Player extends React.PureComponent {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.updatePlayer(this.state.username);
+    this.props.updatePlayer(this.props.id, this.state.username);
   }
   render() {
     return (
       <form className="player-container" onSubmit={this.onSubmit}>
-        <span>{this.props.name}</span>
-        <input onChange={this.onUserNameChange} className="input" placeholder="github username" />
-        <button className="button">Submit</button>
+        <label className="header" htmlFor="username" >{this.props.name}</label >
+        <input id="username" 
+          autoComplete="off" 
+          onChange={this.onUserNameChange} 
+          className="input" 
+          placeholder="github username" />
+        <button className="button" type="submit" disabled={!this.state.username}>Submit</button>
       </form>
     );
   }
 }
 
-Player.propTypes = {
+PlayerInput.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   updatePlayer: PropTypes.func.isRequired,
 }
 
-export default Player;
+export default PlayerInput;

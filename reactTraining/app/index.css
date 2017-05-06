@@ -18,6 +18,11 @@ li {
   margin: 0 auto;
 }
 
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
 .languages {
   display: flex;
   justify-content: center;
@@ -104,11 +109,6 @@ a {
 
 .button.active {
   transform: translateY(1px);
-}
-
-.battle-container {
-  display: flex;
-  justify-content: space-around;
 }
 
 .player-container {
