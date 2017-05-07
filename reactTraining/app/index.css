@@ -133,5 +133,16 @@ a {
 }
 
 .reset {
-  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #d0021B;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -6,12 +6,12 @@ class PlayerInfo extends React.PureComponent {
   render() {
     const {playerName, playerImage, id} = this.props;
     return (
-      <div>
-        <div>{playerName}</div>
-        <img className="player-image" src={playerImage} />
-        <a className="reset" onClick={() => this.props.onReset({ id })}>
+      <div className="column">
+        <img className="avatar" src={playerImage} />
+        <h2 className="username">@{playerName}</h2>
+        <button className="reset" onClick={() => this.props.onReset({ id })}>
           Reset
-        </a>
+        </button>
       </div>
     )
   }
