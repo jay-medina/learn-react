@@ -1,6 +1,7 @@
 import React from 'react';
 import PlayerInput from './playerInput';
 import PlayerInfo from './playerInfo';
+import { Link } from 'react-router-dom';
 
 class Battle extends React.PureComponent {
   constructor(props) {
@@ -37,11 +38,29 @@ class Battle extends React.PureComponent {
       };
     });
   }
+  renderBattleButton() {
+    const {match} = this.props;
+    const {playerOne, playerTwo} = this.state;
+
+    if(playerOne && playerTwo) {
+      return (
+        <div className="row">
+          <Link className="button" 
+                to={
+                   {
+                    pathname: match.url + '/results',
+                    search: `?playerOneName=${playerOne}&playerTwoName=${playerTwo}`,
+                   }
+                }>Battle</Link>
+        </div>
+      );
+    }
+    return '';
+  }
   render() {
     const {playerOne, playerTwo, playerOneImage, playerTwoImage} = this.state;
-
     return (
-      <div >
+      <div>
         <div className="row">
           {
             this.renderPlayer(
@@ -62,6 +81,7 @@ class Battle extends React.PureComponent {
             )
           }
         </div>
+        {this.renderBattleButton()}
       </div>
     );
   }
