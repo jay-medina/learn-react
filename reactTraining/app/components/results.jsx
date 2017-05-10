@@ -50,14 +50,21 @@ class Results extends React.PureComponent {
       return (
         <div>
           <p>{error}</p>
-          <Link to='/battle'>Reset</Link>
+          <Link to="/battle">Reset</Link>
         </div>
       );
     }
 
     return (
-      <div>
-        {JSON.stringify(this.state, null, 2)}
+      <div className="row">
+        <Player label="Winner"
+          score={winner.score}
+          profile={winner.profile}
+        />
+        <Player label="Loser"
+          score={winner.score}
+          profile={winner.profile}
+        />
       </div>
     );
   }
