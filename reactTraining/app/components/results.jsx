@@ -2,6 +2,7 @@ import React from 'react';
 import {parse} from 'query-string';
 import {Link} from 'react-router-dom';
 import { battle } from '../utils/api';
+import Player from './player';
 
 class Results extends React.PureComponent {
   constructor(props) {
@@ -62,8 +63,8 @@ class Results extends React.PureComponent {
           profile={winner.profile}
         />
         <Player label="Loser"
-          score={winner.score}
-          profile={winner.profile}
+          score={loser.score}
+          profile={loser.profile}
         />
       </div>
     );

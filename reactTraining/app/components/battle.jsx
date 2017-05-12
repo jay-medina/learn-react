@@ -66,7 +66,11 @@ class Battle extends React.PureComponent {
             this.renderPlayer(
               playerOne, 
               <PlayerInput id="playerOne" name={'Player One'} updatePlayer={this.updatePlayer} />,
-              <PlayerInfo id="playerOne" playerName={playerOne} playerImage={playerOneImage} onReset={this.onReset} />,
+              <PlayerInfo id="playerOne" playerName={playerOne} playerImage={playerOneImage} onReset={this.onReset}>
+                <button className="reset" onClick={() => this.onReset({ id: 'playerOne' })}>
+                  Reset
+                </button>
+              </PlayerInfo>,
             )
           }
           {
@@ -77,7 +81,11 @@ class Battle extends React.PureComponent {
                 id="playerTwo"
                 playerName={playerTwo} 
                 playerImage={playerTwoImage} 
-                onReset={this.onReset} />,
+                onReset={this.onReset}>
+                <button className="reset" onClick={() => this.onReset({ id: 'playerTwo' })}>
+                  Reset
+                </button>
+              </PlayerInfo>,
             )
           }
         </div>
