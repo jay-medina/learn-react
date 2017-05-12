@@ -4,24 +4,20 @@ import PropTypes from 'prop-types';
 
 class PlayerInfo extends React.PureComponent {
   render() {
-    const {playerName, playerImage, id} = this.props;
+    const {playerName, playerImage} = this.props;
     return (
       <div className="column">
         <img className="avatar" src={playerImage} />
         <h2 className="username">@{playerName}</h2>
-        <button className="reset" onClick={() => this.props.onReset({ id })}>
-          Reset
-        </button>
+        {this.props.children}
       </div>
     )
   }
 }
 
 PlayerInfo.proptypes = {
-  id: PropTypes.string.isRequired,
   playerName: PropTypes.string.isRequired,
   playerImage: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
 };
 
 
