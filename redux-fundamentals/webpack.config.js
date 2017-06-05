@@ -1,21 +1,25 @@
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-  entry: './app/main.tsx',
+  entry: './app/main.ts',
   output: {
-    path: './dist/',
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
   },
   devServer: {
     inline: true,
     port: 8080
   },
-  devtool: 'source-map',
+  devtool: "cheap-eval-source-map",
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: 'ts-loader'
       }
     ]
-  }
+  },
+  plugins: [new HtmlWebpackPlugin()]
 };
