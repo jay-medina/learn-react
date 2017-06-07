@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "build": "webpack",
     "start": "webpack-dev-server"
   },
   "author": "",
