@@ -5,11 +5,14 @@ module.exports = {
   entry: './app/main.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js'
+    filename: 'app/index.js'
   },
   devServer: {
     inline: true,
     port: 8080
+  },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
   },
   devtool: "cheap-eval-source-map",
   module: {

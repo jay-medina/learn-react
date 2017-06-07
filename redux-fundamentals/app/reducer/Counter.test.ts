@@ -1,23 +1,23 @@
-import Counter from './Counter';
+import { counter } from './Counter';
 
 describe('Counter', function () {
 
   describe('initial state', function () {
     it('should return zero', function () {
-      expect(Counter(undefined, {} as any)).toBe(0);
+      expect(counter(undefined, {} as any)).toBe(0);
     });
   });
 
   describe('increment', function () {
     describe('when count is zero', function () {
       it('should become 1', function() {
-        expect(Counter(0, {type: 'INCREMENT'})).toBe(1);
+        expect(counter(0, {type: 'INCREMENT'})).toBe(1);
       });
     });
 
     describe('when count is 1', function () {
       it('should become 2', function() {
-        expect(Counter(1, {type: 'INCREMENT'})).toBe(2);
+        expect(counter(1, {type: 'INCREMENT'})).toBe(2);
       });
     });
   });
@@ -25,13 +25,13 @@ describe('Counter', function () {
   describe('decrement', function () {
     describe('when count is 2', function () {
       it('should become 1', function() {
-        expect(Counter(2, {type: 'DECREMENT'})).toBe(1);
+        expect(counter(2, {type: 'DECREMENT'})).toBe(1);
       });
     });
 
     describe('when count is 1', function () {
       it('should become 0', function() {
-        expect(Counter(1, {type: 'DECREMENT'})).toBe(0);
+        expect(counter(1, {type: 'DECREMENT'})).toBe(0);
       });
     });
   });
@@ -39,7 +39,7 @@ describe('Counter', function () {
   describe('unknown action', function () {
     describe('when count is 2', function () {
       it('should remain 2', function() {
-        expect(Counter(2, {type: 'UNKNOWN' as any})).toBe(2);
+        expect(counter(2, {type: 'UNKNOWN' as any})).toBe(2);
       });
     });
   });
