@@ -1,4 +1,4 @@
-import { counter } from './Counter';
+import { counter } from './reducer';
 
 describe('Counter', function () {
 
