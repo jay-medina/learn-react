@@ -6,40 +6,43 @@ interface TestContext {
   wrapper: ShallowWrapper<any, any>;
   onDecrement: jest.Mock<any>;
   onIncrement: jest.Mock<any>;
+  meow: string;
 }
 
-describe('counter/<Counter />', function() {
-  beforeEach(function (this: TestContext) {
-    this.onDecrement = jest.fn();
-    this.onIncrement = jest.fn();
-    this.wrapper = shallow(
-      <Counter 
+describe('counter/Counter', function() {
+  let context = {} as TestContext;
+
+  beforeEach(function () {
+    context.onDecrement = jest.fn();
+    context.onIncrement = jest.fn();
+    context.wrapper = shallow(
+      <Counter
         value={123}
-        onDecrement={this.onDecrement}
-        onIncrement={this.onIncrement}
+        onDecrement={context.onDecrement}
+        onIncrement={context.onIncrement}
       />
     );
-    console.log('wrapper', this.wrapper);
   });
 
-  it('renders the value', function (this: TestContext) {
-    console.log('wrapper', this.wrapper);
-    expect(this.wrapper.find('h1').text()).toBe('123');
+  test('renders the value', function () {
+    expect(context.wrapper.find('h1').text()).toBe('123');
   });
 
-  it('renders the increment/decrement buttons', function (this: TestContext) {
-    expect(true).toBe(false);
+  it('renders the increment/decrement buttons', function () {
+    expect(context.wrapper.find('button').length).toBe(2);
   });
 
   describe('when increment is clicked', function () {
-    it('invokes the increment callback', function (this: TestContext) {
-      expect(true).toBe(false);
+    it('invokes the increment callback', function () {
+      context.wrapper.find('.counter__increment-btn').simulate('click');
+      expect(context.onIncrement).toHaveBeenCalled();
     });
   });
 
   describe('when decrement is clicked', function () {
-    it('invokes the decrement callback', function (this: TestContext) {
-      expect(true).toBe(false);
+    it('invokes the decrement callback', function () {
+      context.wrapper.find('.counter__decrement-btn').simulate('click');
+      expect(context.onDecrement).toHaveBeenCalled();
     });
   });
 });

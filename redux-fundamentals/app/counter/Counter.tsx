@@ -11,8 +11,8 @@ const Counter = ({value, onDecrement, onIncrement}: CounterProps) => {
     <div>
       <h1>{value}</h1>
       <div>
-        <button onClick={onIncrement}>+</button>
-        <button onClick={onDecrement}>-</button>
+        <button className="counter__increment-btn" onClick={onIncrement}>+</button>
+        <button className="counter__decrement-btn" onClick={onDecrement}>-</button>
       </div>
     </div>
   );
