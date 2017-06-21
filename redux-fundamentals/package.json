@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
-    "watch": "rm -rf .jest && jest --watch",
+    "test": "jest --coverage --config=./jest.json",
+    "watch": "jest --watch --config=./jest.json",
     "build": "webpack",
     "start": "webpack-dev-server"
   },
@@ -31,42 +31,5 @@
     "react-dom": "^15.5.4",
     "redux": "^3.6.0",
     "typescript": "^2.3.4"
-  },
-  "jest": {
-    "cacheDirectory": "./.jest",
-    "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/*.{ts,tsx}",
-      "!**/node_modules/**",
-      "!**/vendor/**"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/node_modules/",
-      "<rootDir>/dist/"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "text-summary"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 20,
-        "functions": 20,
-        "lines": 20,
-        "statements": 20
-      }
-    },
-    "mapCoverage": true,
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
   }
 }
