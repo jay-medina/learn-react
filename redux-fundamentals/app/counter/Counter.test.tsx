@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
+import * as React from 'react';
 import { Counter } from './Counter';
-
 
 describe('counter/Counter', function() {
   let wrapper: ShallowWrapper<any, any>;
@@ -16,7 +15,7 @@ describe('counter/Counter', function() {
         value={123}
         onDecrement={onDecrement}
         onIncrement={onIncrement}
-      />
+      />,
     );
   });
 

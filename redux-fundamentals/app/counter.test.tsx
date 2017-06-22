@@ -1,6 +1,6 @@
 jest.mock('redux');
 
-describe('counter', function() {
+describe('counter', function () {
   let subscribe: any;
   let getState: any;
   let createStore: any;
@@ -22,12 +22,11 @@ describe('counter', function() {
       require('./counter');
     });
 
-
-    it('creates a store', function() {
+    it('creates a store', function () {
       expect(createStore).toHaveBeenCalledWith(expect.any(Function));
     });
 
-    it('subscribes to the render function', function() {
+    it('subscribes to the render function', function () {
       expect(subscribe).toHaveBeenCalled();
     });
 
@@ -35,7 +34,6 @@ describe('counter', function() {
       expect(getState).toHaveBeenCalled();
     });
 
-  })
-
+  });
 
 });
