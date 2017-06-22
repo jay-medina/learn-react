@@ -1,8 +1,8 @@
 import {
-  counter,
   addCounter,
-  removeCounter,
+  counter,
   incrementCounter,
+  removeCounter,
 } from './reducer';
 
 describe('counter/reducer', function () {
