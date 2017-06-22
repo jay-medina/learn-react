@@ -1,4 +1,7 @@
 {
+  "extends": [
+    "tslint:latest", "tslint-react"
+  ],
   "rules": {
     "align": [
       true,
@@ -60,13 +63,16 @@
       "check-open-brace",
       "check-whitespace"
     ],
+    "only-arrow-functions": [ false ],
     "quotemark": [
       true,
       "single",
+      "jsx-double",
       "avoid-escape"
     ],
     "radix": false,
     "semicolon": [true],
+    "space-before-function-paren": false,
     "switch-default": false,
     "trailing-comma": [
 			true,
@@ -90,12 +96,6 @@
         "property-declaration": "nospace",
         "variable-declaration": "nospace"
       }
-    ],
-    "variable-name": [
-      true,
-      "check-format",
-      "allow-leading-underscore",
-      "ban-keywords"
     ],
     "whitespace": [
       true,

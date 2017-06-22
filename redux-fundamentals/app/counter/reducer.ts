@@ -2,7 +2,7 @@ export interface Action {
   type: 'INCREMENT' | 'DECREMENT';
 }
 
-export function counter(state = 0, action: Action) {
+export function counter (state = 0, action: Action) {
   switch ( action.type ) {
     case 'INCREMENT' : return state + 1;
     case 'DECREMENT' : return state - 1;
@@ -10,15 +10,15 @@ export function counter(state = 0, action: Action) {
   }
 }
 
-export function addCounter(list: Array<number>) {
+export function addCounter (list: number[]) {
   return [...list, 0];
 }
 
-export function removeCounter(list: Array<number>, index: number) {
+export function removeCounter (list: number[], index: number) {
   return [...list.slice(0, index), ...list.slice(index + 1)];
 }
 
-export function incrementCounter(list: Array<number>, index: number) {
+export function incrementCounter (list: number[], index: number) {
   return [
     ...list.slice(0, index),
     list[index] + 1,

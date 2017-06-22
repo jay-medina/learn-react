@@ -22,7 +22,7 @@ function render() {
       onIncrement={onIncrement}
       onDecrement={onDecrement}
     />,
-    container
+    container,
   );
 }
 store.subscribe(render);

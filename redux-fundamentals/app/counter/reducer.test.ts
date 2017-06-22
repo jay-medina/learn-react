@@ -52,7 +52,7 @@ describe('counter/reducer', function () {
   });
 
   describe('addCounter', function () {
-    let listBefore: Array<number>;
+    let listBefore: number[];
 
     beforeEach(function () {
       listBefore = [];
@@ -68,7 +68,7 @@ describe('counter/reducer', function () {
   });
 
   describe('remove counter', function () {
-    let listBefore: Array<number>;
+    let listBefore: number[];
 
     beforeEach(function () {
       listBefore = [0, 10, 20];
@@ -84,7 +84,7 @@ describe('counter/reducer', function () {
   });
 
   describe('increment counter', function () {
-    let listBefore: Array<number>;
+    let listBefore: number[];
 
     beforeEach(function () {
       listBefore = [0, 10, 20];
