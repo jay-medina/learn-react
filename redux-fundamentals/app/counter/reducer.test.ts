@@ -1,4 +1,9 @@
-import { counter, addCounter, removeCounter } from './reducer';
+import {
+  counter,
+  addCounter,
+  removeCounter,
+  incrementCounter,
+} from './reducer';
 
 describe('counter/reducer', function () {
 
@@ -46,35 +51,51 @@ describe('counter/reducer', function () {
     });
   });
 
-  describe('addCounter', function() {
+  describe('addCounter', function () {
     let listBefore: Array<number>;
 
-    beforeEach(function() {
+    beforeEach(function () {
       listBefore = [];
     });
 
-    it('should add 0 to the counter list', function() {
+    it('should add 0 to the counter list', function () {
       expect(addCounter(listBefore)).toEqual([0]);
     });
 
-    it('should be different objects', function() {
+    it('should be different objects', function () {
       expect(addCounter(listBefore)).not.toBe([0]);
     });
   });
 
-  describe('remove counter', function() {
+  describe('remove counter', function () {
     let listBefore: Array<number>;
 
-    beforeEach(function() {
+    beforeEach(function () {
       listBefore = [0, 10, 20];
     });
 
-    it('should remove the second item in the list', function() {
+    it('should remove the second item in the list', function () {
       expect(removeCounter(listBefore, 1)).toEqual([0, 20]);
     });
 
-    it('should be different objects', function() {
+    it('should be different objects', function () {
       expect(removeCounter(listBefore, 1)).not.toBe([0, 20]);
+    });
+  });
+
+  describe('increment counter', function () {
+    let listBefore: Array<number>;
+
+    beforeEach(function () {
+      listBefore = [0, 10, 20];
+    });
+
+    it('should increment the second item in the list', function () {
+      expect(incrementCounter(listBefore, 0)).toEqual([1, 10, 20]);
+    });
+
+    it('should be different objects', function () {
+      expect(incrementCounter(listBefore, 0)).not.toBe([1, 10, 20]);
     });
   });
 

@@ -17,3 +17,11 @@ export function addCounter(list: Array<number>) {
 export function removeCounter(list: Array<number>, index: number) {
   return [...list.slice(0, index), ...list.slice(index + 1)];
 }
+
+export function incrementCounter(list: Array<number>, index: number) {
+  return [
+    ...list.slice(0, index),
+    list[index] + 1,
+    ...list.slice(index + 1),
+  ];
+}
