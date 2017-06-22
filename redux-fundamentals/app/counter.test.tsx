@@ -22,7 +22,6 @@ describe('counter', function() {
       require('./counter');
     });
 
-
     it('creates a store', function() {
       expect(createStore).toHaveBeenCalledWith(expect.any(Function));
     });
@@ -35,7 +34,6 @@ describe('counter', function() {
       expect(getState).toHaveBeenCalled();
     });
 
-  })
-
+  });
 
 });
