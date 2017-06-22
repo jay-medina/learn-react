@@ -17,14 +17,14 @@ function onDecrement() {
 
 function render() {
   ReactDOM.render(
-    <Counter 
-      value={store.getState()} 
+    <Counter
+      value={store.getState()}
       onIncrement={onIncrement}
       onDecrement={onDecrement}
     />,
-    container,
+    container
   );
 }
-store.subscribe(render)
+store.subscribe(render);
 
 render();

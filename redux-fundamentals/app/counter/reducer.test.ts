@@ -1,4 +1,4 @@
-import { counter, addCounter } from './reducer';
+import { counter, addCounter, removeCounter } from './reducer';
 
 describe('counter/reducer', function () {
 
@@ -59,6 +59,22 @@ describe('counter/reducer', function () {
 
     it('should be different objects', function() {
       expect(addCounter(listBefore)).not.toBe([0]);
+    });
+  });
+
+  describe('remove counter', function() {
+    let listBefore: Array<number>;
+
+    beforeEach(function() {
+      listBefore = [0, 10, 20];
+    });
+
+    it('should remove the second item in the list', function() {
+      expect(removeCounter(listBefore, 1)).toEqual([0, 20]);
+    });
+
+    it('should be different objects', function() {
+      expect(removeCounter(listBefore, 1)).not.toBe([0, 20]);
     });
   });
 

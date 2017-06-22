@@ -15,5 +15,5 @@ export function addCounter(list: Array<number>) {
 }
 
 export function removeCounter(list: Array<number>, index: number) {
-  
+  return [...list.slice(0, index), ...list.slice(index + 1)];
 }
