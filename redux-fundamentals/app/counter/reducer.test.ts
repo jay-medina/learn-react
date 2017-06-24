@@ -1,69 +1,57 @@
 import {
-  addCounter,
-  counter,
-  incrementCounter,
-  removeCounter,
+  counterList,
 } from './reducer';
 
 describe('counter/reducer', function () {
+  describe('initial state', function () {
+    it('should return a list with a single counter', function () {
+      expect(counterList(undefined, {} as any)).toEqual([]);
+    });
+  });
 
-  describe('counter', function () {
-    describe('initial state', function () {
-      it('should return zero', function () {
-        expect(counter(undefined, {} as any)).toBe(0);
+  describe('increment', function () {
+    describe('when count is zero', function () {
+      it('should become 1', function () {
+        expect(counterList([0, 10, 20], { type: 'INCREMENT', index: 0 })).toEqual([1, 10, 20]);
       });
     });
 
-    describe('increment', function () {
-      describe('when count is zero', function () {
-        it('should become 1', function () {
-          expect(counter(0, { type: 'INCREMENT' })).toBe(1);
-        });
+    describe('when count is 1', function () {
+      it('should become 2', function () {
+        expect(counterList([1, 10, 20], { type: 'INCREMENT', index: 0 })).toEqual([2, 10, 20]);
       });
+    });
+  });
 
-      describe('when count is 1', function () {
-        it('should become 2', function () {
-          expect(counter(1, { type: 'INCREMENT' })).toBe(2);
-        });
+  describe('decrement', function () {
+    describe('when count is 2', function () {
+      it('should become 1', function () {
+        expect(counterList([2, 10, 20], { type: 'DECREMENT', index: 0 })).toEqual([1, 10, 20]);
       });
     });
 
-    describe('decrement', function () {
-      describe('when count is 2', function () {
-        it('should become 1', function () {
-          expect(counter(2, { type: 'DECREMENT' })).toBe(1);
-        });
-      });
-
-      describe('when count is 1', function () {
-        it('should become 0', function () {
-          expect(counter(1, { type: 'DECREMENT' })).toBe(0);
-        });
+    describe('when count is 1', function () {
+      it('should become 0', function () {
+        expect(counterList([1, 10, 20], { type: 'DECREMENT', index: 0 })).toEqual([0, 10, 20]);
       });
     });
+  });
 
-    describe('unknown action', function () {
-      describe('when count is 2', function () {
-        it('should remain 2', function () {
-          expect(counter(2, { type: 'UNKNOWN' as any })).toBe(2);
-        });
+  describe('unknown action', function () {
+    describe('when count is 2', function () {
+      it('should remain 2', function () {
+        expect(counterList([1, 2, 20], { type: 'UNKNOWN', index: 1 })).toEqual([1, 2, 20]);
       });
     });
   });
 
   describe('addCounter', function () {
-    let listBefore: number[];
-
-    beforeEach(function () {
-      listBefore = [];
-    });
-
     it('should add 0 to the counter list', function () {
-      expect(addCounter(listBefore)).toEqual([0]);
+      expect(counterList([], {type: 'ADD_COUNTER'})).toEqual([0]);
     });
 
     it('should be different objects', function () {
-      expect(addCounter(listBefore)).not.toBe([0]);
+      expect(counterList([], { type: 'ADD_COUNTER' })).not.toBe([0]);
     });
   });
 
@@ -74,29 +62,16 @@ describe('counter/reducer', function () {
       listBefore = [0, 10, 20];
     });
 
+    it('returns back original state if index is missing', function() {
+      expect(counterList(listBefore, { type: 'REMOVE_COUNTER'})).toBe(listBefore);
+    });
+
     it('should remove the second item in the list', function () {
-      expect(removeCounter(listBefore, 1)).toEqual([0, 20]);
+      expect(counterList(listBefore, { type: 'REMOVE_COUNTER', index: 1 })).toEqual([0, 20]);
     });
 
     it('should be different objects', function () {
-      expect(removeCounter(listBefore, 1)).not.toBe([0, 20]);
+      expect(counterList(listBefore, { type: 'REMOVE_COUNTER', index: 1 })).not.toBe([0, 20]);
     });
   });
-
-  describe('increment counter', function () {
-    let listBefore: number[];
-
-    beforeEach(function () {
-      listBefore = [0, 10, 20];
-    });
-
-    it('should increment the second item in the list', function () {
-      expect(incrementCounter(listBefore, 0)).toEqual([1, 10, 20]);
-    });
-
-    it('should be different objects', function () {
-      expect(incrementCounter(listBefore, 0)).not.toBe([1, 10, 20]);
-    });
-  });
-
 });
