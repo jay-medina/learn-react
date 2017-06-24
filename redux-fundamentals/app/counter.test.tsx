@@ -14,7 +14,7 @@ describe('counter', function () {
         <div id="container"></div>
       `;
       subscribe = jest.fn();
-      getState = jest.fn();
+      getState = jest.fn(() => []);
       (createStore as jest.Mock<any>).mockReturnValue({
         subscribe,
         getState,

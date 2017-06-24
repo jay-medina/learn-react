@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Counter } from './Counter';
-import { CounterListAction } from './reducer';
+import { CounterAction, CounterListAction } from './reducer';
 
 export interface CounterListProps {
   counters: number[];
@@ -13,8 +13,9 @@ class CounterList extends React.PureComponent<CounterListProps, any> {
     this.onAddCounterClick = this.onAddCounterClick.bind(this);
     this.onRemoveCounterClick = this.onRemoveCounterClick.bind(this);
   }
-  renderCounter(value: number, key: number) {
-    return <Counter key={key} value={value} dispatch={this.props.dispatch} />;
+  renderCounter(value: number, index: number) {
+    const dispatch = (action: CounterAction) => this.props.dispatch({...action, index});
+    return <Counter key={index} value={value} dispatch={dispatch} />;
   }
   renderListOfCounters() {
     return this.props.counters
