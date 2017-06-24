@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { CounterAction } from './reducer';
 
 export interface CounterProps {
   value?: number;
-  dispatch: (action: {type: 'INCREMENT' | 'DECREMENT'}) => any;
+  dispatch: (action: CounterAction) => any;
 }
 
 const Counter = ({value, dispatch}: CounterProps) => {
