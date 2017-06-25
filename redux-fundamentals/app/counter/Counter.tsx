@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { CounterAction } from './reducer';
 
 export interface CounterProps {
   value?: number;
-  onIncrement: () => any;
-  onDecrement: () => any;
+  dispatch: (action: CounterAction) => any;
 }
 
-const Counter = ({value, onDecrement, onIncrement}: CounterProps) => {
+const Counter = ({value, dispatch}: CounterProps) => {
+  const onIncrement = () => dispatch({type: 'INCREMENT'});
+  const onDecrement = () => dispatch({type: 'DECREMENT'});
+
   return (
     <div>
       <h1>{value}</h1>
