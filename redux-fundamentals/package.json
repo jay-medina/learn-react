@@ -7,6 +7,7 @@
     "test:lint": "tslint --type-check -c tslint.json -p tsconfig.json",
     "test:unit": "jest --coverage --config=./jest.json",
     "watch:test": "jest --watchAll --config=./jest.json",
+    "compile:test": "tsc -p tsconfig.json --outDir .testFiles",
     "build": "webpack",
     "start": "webpack-dev-server",
     "prepush": "run-s test:lint test:unit"
