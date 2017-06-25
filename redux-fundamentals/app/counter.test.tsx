@@ -23,7 +23,7 @@ describe('counter', function () {
     });
 
     it('creates a store', function () {
-      expect(createStore).toHaveBeenCalledWith(expect.any(Function), expect.anything());
+      expect(createStore).toHaveBeenCalledWith(expect.any(Function), undefined);
     });
 
     it('subscribes to the render function', function () {
