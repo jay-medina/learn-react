@@ -8,14 +8,15 @@
       "name": "Debug tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/.bin/jest",  //for vanilla jest
-      "protocol": "legacy",
+      "program": "${workspaceRoot}/node_modules/.bin/jest",
+      // "protocol": "inspector",
       "preLaunchTask": "compile tests",
       "console": "integratedTerminal",
       "args": [
-        "${workspaceRoot}/.testFiles",
-        "--runInBand", // dont fork off processes
-        "--config=./jest.json"
+        ".testFiles",
+        "--config",
+        "${workspaceRoot}/jest.json",
+        "--runInBand"
       ],
       "outFiles": [
         "${workspaceRoot}/.testFiles/**/*"

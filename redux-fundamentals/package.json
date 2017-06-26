@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean:testFiles": "rm -rf .testFiles",
+    "run:jest": "jest --coverage --config=./jest.json",
     "test:lint": "tslint --type-check -c tslint.json -p tsconfig.json",
-    "test:unit": "jest --coverage --config=./jest.json",
+    "test:unit": "run-s clean:testFiles run:jest",
     "watch:test": "jest --watchAll --config=./jest.json",
     "compile:test": "tsc -p tsconfig.json --outDir .testFiles",
+    "clean:jest": "rm -rf .jest",
     "build": "webpack",
     "start": "webpack-dev-server",
-    "prepush": "run-s test:lint test:unit"
+    "prepush": "run-s clean:testFiles test:lint test:unit"
   },
   "author": "",
   "license": "ISC",
