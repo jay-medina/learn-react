@@ -9,17 +9,14 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/.bin/jest",
-      // "protocol": "inspector",
-      "preLaunchTask": "compile tests",
+      "protocol": "inspector",
       "console": "integratedTerminal",
       "args": [
-        ".testFiles",
+        "--runInBand",
+        "--no-cache",
         "--config",
-        "${workspaceRoot}/jest.json",
-        "--runInBand"
-      ],
-      "outFiles": [
-        "${workspaceRoot}/.testFiles/**/*"
+        "${workspaceRoot}/jest.debug.json",
+        "--env=jest-environment-node-debug"
       ],
       "sourceMaps": true
     }

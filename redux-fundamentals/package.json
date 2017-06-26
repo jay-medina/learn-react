@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "clean:testFiles": "rm -rf .testFiles",
+    "clean:jest": "rm -rf .jest",
     "run:jest": "jest --coverage --config=./jest.json",
     "test:lint": "tslint --type-check -c tslint.json -p tsconfig.json",
     "test:unit": "run-s clean:testFiles run:jest",
     "watch:test": "jest --watchAll --config=./jest.json",
-    "compile:test": "tsc -p tsconfig.json --outDir .testFiles",
-    "clean:jest": "rm -rf .jest",
     "build": "webpack",
     "start": "webpack-dev-server",
     "prepush": "run-s clean:testFiles test:lint test:unit"
@@ -27,6 +26,7 @@
     "html-webpack-plugin": "^2.28.0",
     "husky": "^0.13.4",
     "jest": "^20.0.4",
+    "jest-environment-node-debug": "^2.0.0",
     "npm-run-all": "^4.0.2",
     "react-test-renderer": "^15.5.4",
     "ts-jest": "^20.0.6",
