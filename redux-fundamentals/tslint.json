@@ -64,6 +64,9 @@
       "check-whitespace"
     ],
     "only-arrow-functions": [ false ],
+    "ordered-imports": [
+      false
+    ],
     "quotemark": [
       true,
       "single",
