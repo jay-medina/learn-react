@@ -6,10 +6,10 @@
   "scripts": {
     "clean:testFiles": "rm -rf .testFiles",
     "clean:jest": "rm -rf .jest",
-    "run:jest": "jest --coverage --config=./jest.json",
+    "test": "jest --coverage --config=./jest.json",
     "test:lint": "tslint --type-check -c tslint.json -p tsconfig.json",
-    "test:unit": "run-s clean:testFiles run:jest",
-    "watch:test": "jest --watchAll --config=./jest.json",
+    "test:unit": "run-s clean:testFiles test",
+    "test:watch": "jest --watchAll --config=./jest.json",
     "build": "webpack",
     "start": "webpack-dev-server",
     "prepush": "run-s clean:testFiles test:lint test:unit"
