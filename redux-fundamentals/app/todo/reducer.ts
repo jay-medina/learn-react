@@ -5,9 +5,9 @@ export interface Todo {
 }
 
 export interface TodoAction {
-  type: 'ADD_TODO';
+  type: 'ADD_TODO' | 'TOGGLE_TODO';
   id: number;
-  text: string;
+  text?: string;
 }
 
 function addTodo(state: Todo[], action: TodoAction) {
@@ -21,9 +21,22 @@ function addTodo(state: Todo[], action: TodoAction) {
   ];
 }
 
+function toggleTodo(state: Todo[], action: TodoAction) {
+  return state.map((todo: Todo) => {
+    if (todo.id === action.id) {
+      return {
+        ...todo,
+        completed: !todo.completed,
+      };
+    }
+    return todo;
+  });
+}
+
 export const todos = (state = [] as Todo[], action: TodoAction) => {
   switch (action.type) {
     case 'ADD_TODO': return addTodo(state, action);
+    case 'TOGGLE_TODO': return toggleTodo(state, action);
     default: return state;
   }
 };
