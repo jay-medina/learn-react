@@ -11,7 +11,9 @@ describe('counter', function () {
       createStore = require('redux').createStore;
 
       document.body.innerHTML = `
-        <div id="container"></div>
+        <div id="mainCounter">
+          <div id="counter-container"></div>
+        </div>
       `;
       subscribe = jest.fn();
       getState = jest.fn(() => []);

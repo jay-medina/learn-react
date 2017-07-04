@@ -57,6 +57,7 @@
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": true,
+    "no-object-literal-type-assertion": false,
     "object-literal-sort-keys": false,
     "one-line": [
       true,

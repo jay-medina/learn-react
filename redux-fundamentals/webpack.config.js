@@ -24,5 +24,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin({
+    template: 'app/index.html',
+    title: 'Redux demo'
+  })]
 };
