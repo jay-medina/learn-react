@@ -1,10 +1,12 @@
+import { Action, Reducer } from 'redux';
+
 export interface Todo {
   id: number;
   text: string;
   completed: boolean;
 }
 
-export interface TodoAction {
+export interface TodoAction extends Action {
   type: 'ADD_TODO' | 'TOGGLE_TODO';
   id: number;
   text?: string;
@@ -33,7 +35,11 @@ function toggleTodo(state: Todo[], action: TodoAction) {
   });
 }
 
-export const todos = (state = [] as Todo[], action: TodoAction) => {
+export interface TodosReducer<S extends Todo[]> extends Reducer<S> {
+  <A extends TodoAction>(state: Todo[], action: A): S;
+}
+
+export const todos: TodosReducer<Todo[]> = <A extends TodoAction>(state = [] as Todo[], action: A) => {
   switch (action.type) {
     case 'ADD_TODO': return addTodo(state, action);
     case 'TOGGLE_TODO': return toggleTodo(state, action);

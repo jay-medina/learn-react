@@ -9,7 +9,7 @@ describe('todo/visibilityFilter', function () {
   });
 
   it('handles no state case', function () {
-    expect(visibilityFilter(undefined, { type: 'UNKNOWN' } as any)).toEqual('SHOW_ALL');
+    expect(visibilityFilter('' as TodoFilter, { type: 'UNKNOWN' } as any)).toEqual('SHOW_ALL');
   });
 
   it('sets the filter based on the action', function () {
