@@ -14,7 +14,9 @@ class CounterList extends React.PureComponent<CounterListProps, any> {
     this.onRemoveCounterClick = this.onRemoveCounterClick.bind(this);
   }
   renderCounter(value: number, index: number) {
-    const dispatch = (action: CounterAction) => this.props.dispatch({...action, index});
+    const dispatch = (action: CounterAction) => {
+      this.props.dispatch({...action, index});
+    };
     return <Counter key={index} value={value} dispatch={dispatch} />;
   }
   renderListOfCounters() {

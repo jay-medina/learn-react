@@ -1,20 +1,17 @@
+import { combineReducers, Reducer } from 'redux';
 import { todos, TodoAction, Todo } from './todoListReducer';
 import { visibilityFilter, FilterAction, TodoFilter } from './visibilityFilterReducer';
 
-export interface TodoApp {
+export interface TodoAppState {
   todos: Todo[];
   visibilityFilter: TodoFilter;
 }
 
-export const todoApp = (state = {} as TodoApp, action: FilterAction | TodoAction): TodoApp => {
-  return {
-    todos: todos(
-      state.todos,
-      action as TodoAction,
-    ),
-    visibilityFilter: visibilityFilter(
-      state.visibilityFilter,
-      action as FilterAction,
-    ),
-  };
-};
+export interface TodoAppReducer<S> extends Reducer<S> {
+  <A extends (TodoAction | FilterAction)>(state: S, action: A): S;
+}
+
+export const todoApp = combineReducers<TodoAppState>({
+  todos,
+  visibilityFilter,
+}) as TodoAppReducer<TodoAppState>;

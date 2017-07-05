@@ -8,7 +8,7 @@ export interface CounterListAction {
   index?: number;
 }
 
-function counter(state = 0, action: CounterAction) {
+function counter(state: number, action: CounterAction) {
   switch ( action.type ) {
     case 'INCREMENT' : return state + 1;
     case 'DECREMENT' : return state - 1;

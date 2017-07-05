@@ -4,7 +4,7 @@ import {
 
 describe('counter/reducer', function () {
   describe('initial state', function () {
-    it('should return a list with a single counter', function () {
+    it('should return an empty list', function () {
       expect(counterList(undefined, {} as any)).toEqual([]);
     });
   });

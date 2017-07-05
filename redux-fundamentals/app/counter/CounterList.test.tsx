@@ -1,5 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
+import { Counter } from './Counter';
 import CounterList from './CounterList';
 
 describe('counter/CounterList', function () {
@@ -20,7 +21,14 @@ describe('counter/CounterList', function () {
   });
 
   it('renders a list of counters', function () {
-    expect(wrapper.children('Counter').length).toBe(3);
+    expect(wrapper.children(Counter).length).toBe(3);
+  });
+
+  it('calls dispatch', function() {
+    const counters = wrapper.find(Counter);
+    const dispatchFromCounter = counters.at(0).prop('dispatch');
+    dispatchFromCounter({} as any);
+    expect(dispatch).toHaveBeenCalled();
   });
 
   it('renders an add button', function() {
