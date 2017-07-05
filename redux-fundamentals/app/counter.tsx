@@ -1,16 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import { createStore, Store } from 'redux';
 import CounterList from './counter/CounterList';
 import { counterList as counterListReducer} from './counter/reducer';
 
-const contextWindow = (window as any);
-const container = document.querySelector('#counter-container');
-const store = createStore<number[]>(
-  counterListReducer,
-  contextWindow.__REDUX_DEVTOOLS_EXTENSION__ && contextWindow.__REDUX_DEVTOOLS_EXTENSION__());
-
-function render() {
+function render(store: Store<number[]>, container: Element) {
   ReactDOM.render(
     <CounterList
       counters={store.getState()}
@@ -19,6 +13,10 @@ function render() {
     container,
   );
 }
-store.subscribe(render);
 
-render();
+export function start() {
+  const container = document.querySelector('#counter-container');
+  const store = createStore<number[]>(counterListReducer);
+  store.subscribe(() => render(store, container as Element));
+  render(store, container as Element);
+}
