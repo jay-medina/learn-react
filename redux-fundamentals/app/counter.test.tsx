@@ -1,15 +1,14 @@
 jest.mock('redux');
 
+import { createStore } from 'redux';
+import { start } from './counter';
+
 describe('counter', function () {
   let subscribe: any;
   let getState: any;
-  let createStore: any;
 
   describe('when running the app', function () {
     beforeEach(() => {
-      jest.resetModules();
-      createStore = require('redux').createStore;
-
       document.body.innerHTML = `
         <div id="mainCounter">
           <div id="counter-container"></div>
@@ -21,11 +20,11 @@ describe('counter', function () {
         subscribe,
         getState,
       });
-      require('./counter');
+      start();
     });
 
     it('creates a store', function () {
-      expect(createStore).toHaveBeenCalledWith(expect.any(Function), undefined);
+      expect(createStore).toHaveBeenCalledWith(expect.any(Function));
     });
 
     it('subscribes to the render function', function () {
