@@ -7,6 +7,10 @@ describe('todo/reducer', function() {
     expect(todos(stateBefore, {type: 'UNKNOWN'} as any)).toBe(stateBefore);
   });
 
+  it('handles no state case', function () {
+    expect(todos(undefined, { type: 'UNKNOWN' } as any)).toEqual([]);
+  });
+
   it('adds a todo to an empty array', function() {
     const stateBefore = [] as Todo[];
     const after = todos(stateBefore, { id: 0, text: 'Learn Redux', type: 'ADD_TODO'});

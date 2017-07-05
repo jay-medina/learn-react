@@ -36,7 +36,7 @@ function toggleTodo(state: Todo[], action: TodoAction) {
 }
 
 export interface TodosReducer<S extends Todo[]> extends Reducer<S> {
-  <A extends TodoAction>(state: Todo[], action: A): S;
+  <A extends TodoAction>(state: Todo[] | undefined, action: A): S;
 }
 
 export const todos: TodosReducer<Todo[]> = (state = [] as Todo[], action: TodoAction) => {
