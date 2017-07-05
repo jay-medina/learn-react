@@ -39,7 +39,7 @@ export interface TodosReducer<S extends Todo[]> extends Reducer<S> {
   <A extends TodoAction>(state: Todo[], action: A): S;
 }
 
-export const todos: TodosReducer<Todo[]> = <A extends TodoAction>(state = [] as Todo[], action: A) => {
+export const todos: TodosReducer<Todo[]> = (state = [] as Todo[], action: TodoAction) => {
   switch (action.type) {
     case 'ADD_TODO': return addTodo(state, action);
     case 'TOGGLE_TODO': return toggleTodo(state, action);

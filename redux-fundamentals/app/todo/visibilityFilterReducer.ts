@@ -7,11 +7,11 @@ export interface FilterAction extends Action {
   filter: TodoFilter;
 }
 
-export interface TodosReducer<S extends TodoFilter> extends Reducer<S> {
+export interface VFReducer<S extends TodoFilter> extends Reducer<S> {
   <A extends FilterAction>(state: TodoFilter, action: A): S;
 }
 
-export const visibilityFilter: TodosReducer<TodoFilter> = (state = 'SHOW_ALL' as TodoFilter, action: FilterAction) => {
+export const visibilityFilter: VFReducer<TodoFilter> = (state = 'SHOW_ALL' as TodoFilter, action: FilterAction) => {
   switch (action.type) {
     case 'SET_VISIBILITY_FILTER': return action.filter;
     default: return state;
