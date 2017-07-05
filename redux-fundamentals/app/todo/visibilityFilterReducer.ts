@@ -8,7 +8,7 @@ export interface FilterAction extends Action {
 }
 
 export interface VFReducer<S extends TodoFilter> extends Reducer<S> {
-  <A extends FilterAction>(state: TodoFilter, action: A): S;
+  <A extends FilterAction>(state: TodoFilter | undefined, action: A): S;
 }
 
 export const visibilityFilter: VFReducer<TodoFilter> = (state = 'SHOW_ALL' as TodoFilter, action: FilterAction) => {
