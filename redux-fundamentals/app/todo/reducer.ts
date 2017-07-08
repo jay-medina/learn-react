@@ -11,7 +11,7 @@ export interface TodoAppReducer<S> extends Reducer<S> {
   <A extends (TodoAction | FilterAction)>(state: S, action: A): S;
 }
 
-export const todoApp = combineReducers<TodoAppState>({
+export const todoApp = combineReducers({
   todos,
   visibilityFilter,
 }) as TodoAppReducer<TodoAppState>;

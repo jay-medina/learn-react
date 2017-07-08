@@ -20,7 +20,7 @@ describe('todo', function () {
       </div>
     `;
     subscribe = jest.fn();
-    getState = jest.fn(() => []);
+    getState = jest.fn(() => ({todos: []}));
     (createStore as jest.Mock<any>).mockReturnValue({
       subscribe,
       getState,
