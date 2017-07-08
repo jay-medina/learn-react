@@ -6,7 +6,10 @@ import TodoApp from './todo/TodoApp';
 
 function render(store: Store<TodoAppState>, container: Element) {
   ReactDOM.render(
-    <TodoApp />,
+    <TodoApp
+      todos={store.getState().todos}
+      dispatch={store.dispatch}
+    />,
     container,
   );
 }
