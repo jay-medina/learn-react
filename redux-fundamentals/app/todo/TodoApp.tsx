@@ -25,6 +25,12 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
     e.preventDefault();
     this.setState({ inputValue: e.target.value });
   }
+  toggleTodo(todo: Todo) {
+    this.props.dispatch({
+      type: 'TOGGLE_TODO',
+      id: todo.id,
+    });
+  }
   addTodo() {
     this.props.dispatch({
       type: 'ADD_TODO',
@@ -34,10 +40,21 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
     id += 1;
     this.setState({ inputValue: '' });
   }
+  getClassName(todo: Todo) {
+    if (todo.completed) {
+      return 'completed';
+    }
+
+    return '';
+  }
   renderTodos() {
-    return this.props.todos.map(( todo ) => {
+    return this.props.todos.map((todo) => {
       return (
-        <li key={todo.id}>
+        <li
+          key={todo.id}
+          className={this.getClassName(todo)}
+          onClick={this.toggleTodo.bind(this, todo)}
+        >
           {todo.text}
         </li>
       );

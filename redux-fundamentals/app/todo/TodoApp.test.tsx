@@ -29,6 +29,10 @@ describe('todo/TodoApp', function() {
     expect(wrapper.find('li').length).toBe(2);
   });
 
+  it('renders completed todos as scratched out', function () {
+    expect(wrapper.find('li').at(1).hasClass('completed')).toBe(true);
+  });
+
   describe('when user inputs a value', function () {
     it('updates the inputValue state', function () {
       expect(wrapper.state('inputValue')).toEqual('');
@@ -52,6 +56,17 @@ describe('todo/TodoApp', function() {
 
     it('resets the input value state', function () {
       expect(wrapper.state('inputValue')).toEqual('');
+    });
+  });
+
+  describe('when clicking on a todo', function () {
+    it('dispatches a toggle todo action', function () {
+      dispatch.mockClear();
+      wrapper.find('li').at(0).simulate('click');
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'TOGGLE_TODO',
+        id: 0,
+      });
     });
   });
 
