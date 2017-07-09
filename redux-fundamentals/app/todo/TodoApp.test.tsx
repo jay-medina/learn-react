@@ -2,6 +2,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import TodoApp from './TodoApp';
 import { Todo, TodoAction } from './todoListReducer';
+import { FilterLink } from './FilterLink';
 
 describe('todo/TodoApp', function() {
   let wrapper: ShallowWrapper<any, any>;
@@ -13,7 +14,7 @@ describe('todo/TodoApp', function() {
 
   beforeEach(function() {
     wrapper = shallow(
-      <TodoApp dispatch={dispatch} todos={todos}/>,
+      <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_ALL"/>,
     );
   });
 
@@ -27,6 +28,63 @@ describe('todo/TodoApp', function() {
 
   it('renders a list of todos', function () {
     expect(wrapper.find('li').length).toBe(2);
+  });
+
+  it('renders completed todos as scratched out', function () {
+    expect(wrapper.find('li').at(1).hasClass('completed')).toBe(true);
+  });
+
+  it('renders the filter links', function () {
+    expect(wrapper.find(FilterLink).length).toBe(3);
+  });
+
+  it('indicates that show all filter link is active', function () {
+    const AllFilterLink = wrapper.find(FilterLink).at(0);
+    expect(AllFilterLink.prop('filter')).toEqual('SHOW_ALL');
+    expect(AllFilterLink.prop('active')).toBe(true);
+  });
+
+  describe('when filter is active', function () {
+    beforeEach(function () {
+      wrapper = shallow(
+        <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_ACTIVE" />,
+      );
+    });
+
+    it('show all filter link is not active', function () {
+      const AllFilterLink = wrapper.find(FilterLink).at(0);
+      expect(AllFilterLink.prop('active')).toBe(false);
+    });
+
+    it('indicates that show active filter link is active', function () {
+      const AllFilterLink = wrapper.find(FilterLink).at(2);
+      expect(AllFilterLink.prop('filter')).toEqual('SHOW_ACTIVE');
+      expect(AllFilterLink.prop('active')).toBe(true);
+    });
+
+    it('only renders active todo items', function () {
+      expect(wrapper.find('li').length).toBe(1);
+      expect(wrapper.find('li').hasClass('completed')).toBe(false);
+    });
+  });
+
+  describe('when filter is completed', function () {
+    beforeEach(function () {
+      wrapper = shallow(
+        <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_COMPLETED" />,
+      );
+    });
+
+    it('indicates that show completed filter link is active', function () {
+      const AllFilterLink = wrapper.find(FilterLink).at(1);
+      expect(AllFilterLink.prop('filter')).toEqual('SHOW_COMPLETED');
+      expect(AllFilterLink.prop('active')).toBe(true);
+    });
+
+    it('only renders active todo items', function () {
+      expect(wrapper.find('li').length).toBe(1);
+      expect(wrapper.find('li').hasClass('completed')).toBe(true);
+    });
   });
 
   describe('when user inputs a value', function () {
@@ -52,6 +110,17 @@ describe('todo/TodoApp', function() {
 
     it('resets the input value state', function () {
       expect(wrapper.state('inputValue')).toEqual('');
+    });
+  });
+
+  describe('when clicking on a todo', function () {
+    it('dispatches a toggle todo action', function () {
+      dispatch.mockClear();
+      wrapper.find('li').at(0).simulate('click');
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'TOGGLE_TODO',
+        id: 0,
+      });
     });
   });
 

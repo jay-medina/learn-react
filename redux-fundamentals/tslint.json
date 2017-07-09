@@ -24,6 +24,8 @@
     ],
     "interface-name": [false],
     "jsdoc-format": true,
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false,
     "label-position": true,
     "max-line-length": [
       false,
