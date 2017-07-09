@@ -5,12 +5,10 @@ import { todoApp, TodoAppState } from './todo/reducer';
 import TodoApp from './todo/TodoApp';
 
 function render(store: Store<TodoAppState>, container: Element) {
-  const {todos, visibilityFilter} = store.getState();
   ReactDOM.render(
     <TodoApp
-      todos={todos}
+      {...store.getState()}
       dispatch={store.dispatch}
-      visibilityFilter={visibilityFilter}
     />,
     container,
   );

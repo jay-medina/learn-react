@@ -81,7 +81,7 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
           {this.renderTodos()}
         </ul>
         <p>
-          Show: {' '}
+          Show:
           <FilterLink
             filter={'SHOW_ALL'}
             dispatch={this.props.dispatch}
