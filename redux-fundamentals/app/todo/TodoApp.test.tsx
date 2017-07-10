@@ -3,6 +3,7 @@ import * as React from 'react';
 import TodoApp from './TodoApp';
 import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterLink } from './FilterLink';
+import TodoList from './TodoList';
 
 describe('todo/TodoApp', function() {
   let wrapper: ShallowWrapper<any, any>;
@@ -27,11 +28,7 @@ describe('todo/TodoApp', function() {
   });
 
   it('renders a list of todos', function () {
-    expect(wrapper.find('li').length).toBe(2);
-  });
-
-  it('renders completed todos as scratched out', function () {
-    expect(wrapper.find('li').at(1).hasClass('completed')).toBe(true);
+    expect(wrapper.find(TodoList).length).toBe(1);
   });
 
   it('renders the filter links', function () {
@@ -63,8 +60,9 @@ describe('todo/TodoApp', function() {
     });
 
     it('only renders active todo items', function () {
-      expect(wrapper.find('li').length).toBe(1);
-      expect(wrapper.find('li').hasClass('completed')).toBe(false);
+      const todos = wrapper.find(TodoList).prop('todos');
+      expect(todos.length).toBe(1);
+      expect(todos[0].completed).toBe(false);
     });
   });
 
@@ -82,8 +80,9 @@ describe('todo/TodoApp', function() {
     });
 
     it('only renders active todo items', function () {
-      expect(wrapper.find('li').length).toBe(1);
-      expect(wrapper.find('li').hasClass('completed')).toBe(true);
+      const todos = wrapper.find(TodoList).prop('todos');
+      expect(todos.length).toBe(1);
+      expect(todos[0].completed).toBe(true);
     });
   });
 
@@ -116,7 +115,8 @@ describe('todo/TodoApp', function() {
   describe('when clicking on a todo', function () {
     it('dispatches a toggle todo action', function () {
       dispatch.mockClear();
-      wrapper.find('li').at(0).simulate('click');
+      const onTodoClick = wrapper.find(TodoList).prop('onTodoClick');
+      onTodoClick(0);
       expect(dispatch).toHaveBeenCalledWith({
         type: 'TOGGLE_TODO',
         id: 0,

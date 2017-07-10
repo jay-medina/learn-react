@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterAction, TodoFilter } from './reducers/visibilityFilterReducer';
 import { FilterLink } from './FilterLink';
+import TodoList from './TodoList';
 
 interface TodoAppProps {
   dispatch: (action: TodoAction | FilterAction) => void;
@@ -20,6 +21,7 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
     super(props);
     this.addTodo = this.addTodo.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.toggleTodo = this.toggleTodo.bind(this);
     this.state = {
       inputValue : '',
     };
@@ -28,10 +30,10 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
     e.preventDefault();
     this.setState({ inputValue: e.target.value });
   }
-  toggleTodo(todo: Todo) {
+  toggleTodo(todoId: number) {
     this.props.dispatch({
       type: 'TOGGLE_TODO',
-      id: todo.id,
+      id: todoId,
     });
   }
   addTodo() {
@@ -43,13 +45,6 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
     id += 1;
     this.setState({ inputValue: '' });
   }
-  getClassName(todo: Todo) {
-    if (todo.completed) {
-      return 'completed';
-    }
-
-    return '';
-  }
   filterTodos() {
     const { todos, visibilityFilter } = this.props;
 
@@ -59,27 +54,12 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
         (visibilityFilter === 'SHOW_ALL');
     });
   }
-  renderTodos() {
-    return this.filterTodos().map((todo) => {
-      return (
-        <li
-          key={todo.id}
-          className={this.getClassName(todo)}
-          onClick={this.toggleTodo.bind(this, todo)}
-        >
-          {todo.text}
-        </li>
-      );
-    });
-  }
   render() {
     return (
       <div>
         <input type="text" onChange={this.onInputChange} value={this.state.inputValue} />
         <button onClick={this.addTodo}>Add Todo</button>
-        <ul>
-          {this.renderTodos()}
-        </ul>
+        <TodoList todos={this.filterTodos()} onTodoClick={this.toggleTodo}/>
         <p>
           Show:
           <FilterLink
