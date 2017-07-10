@@ -1,7 +1,7 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import TodoApp from './TodoApp';
-import { Todo, TodoAction } from './todoListReducer';
+import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterLink } from './FilterLink';
 
 describe('todo/TodoApp', function() {
