@@ -2,8 +2,9 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import TodoApp from './TodoApp';
 import { Todo, TodoAction } from './reducers/todoListReducer';
-import { FilterLink } from './FilterLink';
 import TodoList from './TodoList';
+import Footer from './Footer';
+import AddTodo from './AddTodo';
 
 describe('todo/TodoApp', function() {
   let wrapper: ShallowWrapper<any, any>;
@@ -19,26 +20,16 @@ describe('todo/TodoApp', function() {
     );
   });
 
-  it('renders an input text box', function () {
-    expect(wrapper.find('input').length).toBe(1);
-  });
-
-  it('renders an Add Todo button', function () {
-    expect(wrapper.find('button').text()).toEqual('Add Todo');
+  it('renders an Add Todo Section', function () {
+    expect(wrapper.find(AddTodo).length).toBe(1);
   });
 
   it('renders a list of todos', function () {
     expect(wrapper.find(TodoList).length).toBe(1);
   });
 
-  it('renders the filter links', function () {
-    expect(wrapper.find(FilterLink).length).toBe(3);
-  });
-
-  it('indicates that show all filter link is active', function () {
-    const AllFilterLink = wrapper.find(FilterLink).at(0);
-    expect(AllFilterLink.prop('filter')).toEqual('SHOW_ALL');
-    expect(AllFilterLink.prop('active')).toBe(true);
+  it('renders the Footer', function () {
+    expect(wrapper.find(Footer).length).toBe(1);
   });
 
   describe('when filter is active', function () {
@@ -46,17 +37,6 @@ describe('todo/TodoApp', function() {
       wrapper = shallow(
         <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_ACTIVE" />,
       );
-    });
-
-    it('show all filter link is not active', function () {
-      const AllFilterLink = wrapper.find(FilterLink).at(0);
-      expect(AllFilterLink.prop('active')).toBe(false);
-    });
-
-    it('indicates that show active filter link is active', function () {
-      const AllFilterLink = wrapper.find(FilterLink).at(2);
-      expect(AllFilterLink.prop('filter')).toEqual('SHOW_ACTIVE');
-      expect(AllFilterLink.prop('active')).toBe(true);
     });
 
     it('only renders active todo items', function () {
@@ -73,42 +53,33 @@ describe('todo/TodoApp', function() {
       );
     });
 
-    it('indicates that show completed filter link is active', function () {
-      const AllFilterLink = wrapper.find(FilterLink).at(1);
-      expect(AllFilterLink.prop('filter')).toEqual('SHOW_COMPLETED');
-      expect(AllFilterLink.prop('active')).toBe(true);
-    });
-
-    it('only renders active todo items', function () {
+    it('only renders completed todo items', function () {
       const todos = wrapper.find(TodoList).prop('todos');
       expect(todos.length).toBe(1);
       expect(todos[0].completed).toBe(true);
     });
   });
 
-  describe('when user inputs a value', function () {
-    it('updates the inputValue state', function () {
-      expect(wrapper.state('inputValue')).toEqual('');
-      wrapper.find('input').simulate('change', mockEvent());
-      expect(wrapper.state('inputValue')).toEqual('hello');
+  describe('when a filter is clicked', function () {
+    it('tries to set the new visibility filter', function () {
+      const onFilterClick = wrapper.find(Footer).prop('onFilterClick');
+      onFilterClick('SHOW_ACTIVE');
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: 'SHOW_ACTIVE',
+      });
     });
   });
 
   describe('when add todo button is clicked', function () {
-    beforeEach(function () {
-      wrapper.setState({ inputValue: 'newTodo!' });
-      wrapper.find('button').simulate('click');
-    });
     it('dispatches an add todo action', function () {
+      const onAddClick = wrapper.find(AddTodo).prop('onAddClick');
+      onAddClick('newTodo!');
       expect(dispatch).toHaveBeenCalledWith({
         type: 'ADD_TODO',
         text: 'newTodo!',
         id: 1,
       });
-    });
-
-    it('resets the input value state', function () {
-      expect(wrapper.state('inputValue')).toEqual('');
     });
   });
 

@@ -3,6 +3,8 @@ import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterAction, TodoFilter } from './reducers/visibilityFilterReducer';
 import { FilterLink } from './FilterLink';
 import TodoList from './TodoList';
+import Footer from './Footer';
+import AddTodo from './AddTodo';
 
 interface TodoAppProps {
   dispatch: (action: TodoAction | FilterAction) => void;
@@ -10,25 +12,14 @@ interface TodoAppProps {
   visibilityFilter: TodoFilter;
 }
 
-interface TodoAppState {
-  inputValue: string;
-}
-
 let id = 1;
 
-class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
+class TodoApp extends React.PureComponent<TodoAppProps, object> {
   constructor(props: TodoAppProps) {
     super(props);
     this.addTodo = this.addTodo.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
     this.toggleTodo = this.toggleTodo.bind(this);
-    this.state = {
-      inputValue : '',
-    };
-  }
-  onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    this.setState({ inputValue: e.target.value });
+    this.setVisibilityFilter = this.setVisibilityFilter.bind(this);
   }
   toggleTodo(todoId: number) {
     this.props.dispatch({
@@ -36,14 +27,19 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
       id: todoId,
     });
   }
-  addTodo() {
+  addTodo(text: string) {
     this.props.dispatch({
       type: 'ADD_TODO',
-      text: this.state.inputValue,
+      text,
       id,
     });
     id += 1;
-    this.setState({ inputValue: '' });
+  }
+  setVisibilityFilter(filter: TodoFilter) {
+    this.props.dispatch({
+      type: 'SET_VISIBILITY_FILTER',
+      filter,
+    });
   }
   filterTodos() {
     const { todos, visibilityFilter } = this.props;
@@ -57,33 +53,9 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
   render() {
     return (
       <div>
-        <input type="text" onChange={this.onInputChange} value={this.state.inputValue} />
-        <button onClick={this.addTodo}>Add Todo</button>
+        <AddTodo onAddClick={this.addTodo} />
         <TodoList todos={this.filterTodos()} onTodoClick={this.toggleTodo}/>
-        <p>
-          Show:
-          <FilterLink
-            filter={'SHOW_ALL'}
-            dispatch={this.props.dispatch}
-            active={this.props.visibilityFilter === 'SHOW_ALL'}
-          >
-            All
-          </FilterLink>
-          <FilterLink
-            filter={'SHOW_COMPLETED'}
-            dispatch={this.props.dispatch}
-            active={this.props.visibilityFilter === 'SHOW_COMPLETED'}
-          >
-            Completed
-          </FilterLink>
-          <FilterLink
-            filter={'SHOW_ACTIVE'}
-            dispatch={this.props.dispatch}
-            active={this.props.visibilityFilter === 'SHOW_ACTIVE'}
-          >
-            Active
-          </FilterLink>
-        </p>
+        <Footer onFilterClick={this.setVisibilityFilter} visibilityFilter={this.props.visibilityFilter} />
       </div>
     );
   }
