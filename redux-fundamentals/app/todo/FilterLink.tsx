@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TodoFilter, FilterAction } from './visibilityFilterReducer';
+import { TodoFilter, FilterAction } from './reducers/visibilityFilterReducer';
 
 export interface FilterLinkProps {
   filter: TodoFilter;

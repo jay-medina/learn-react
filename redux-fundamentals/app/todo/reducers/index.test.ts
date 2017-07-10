@@ -12,7 +12,7 @@ jest.mock('./visibilityFilterReducer', () => {
 });
 
 import { combineReducers } from 'redux';
-import { todoApp, TodoAppState} from './reducer';
+import { todoApp, TodoAppState} from './index';
 import { todos, TodoAction } from './todoListReducer';
 import { visibilityFilter } from './visibilityFilterReducer';
 

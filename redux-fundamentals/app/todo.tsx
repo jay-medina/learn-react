@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore, Store } from 'redux';
-import { todoApp, TodoAppState } from './todo/reducer';
+import { todoApp, TodoAppState } from './todo/reducers';
 import TodoApp from './todo/TodoApp';
 
 function render(store: Store<TodoAppState>, container: Element) {

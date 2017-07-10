@@ -1,5 +1,5 @@
 jest.mock('redux');
-jest.mock('./todo/reducer', () => {
+jest.mock('./todo/reducers', () => {
   return {
     todoApp: jest.fn(),
   };
@@ -7,7 +7,7 @@ jest.mock('./todo/reducer', () => {
 
 import { createStore } from 'redux';
 import { start } from './todo';
-import { todoApp } from './todo/reducer';
+import { todoApp } from './todo/reducers';
 
 describe('todo', function () {
   let subscribe: any;
