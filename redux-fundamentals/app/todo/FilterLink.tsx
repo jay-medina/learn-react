@@ -1,24 +1,21 @@
 import * as React from 'react';
-import { TodoFilter, FilterAction } from './reducers/visibilityFilterReducer';
+import { TodoFilter } from './reducers/visibilityFilterReducer';
 
 export interface FilterLinkProps {
   filter: TodoFilter;
-  dispatch: (action: FilterAction) => void;
   active?: boolean;
+  onFilterClick: (filter: TodoFilter) => void;
 }
 
 function onClick(props: FilterLinkProps) {
   return (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    props.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: props.filter,
-    });
+    props.onFilterClick(props.filter);
   };
 }
 
 export const FilterLink: React.StatelessComponent<FilterLinkProps> = (props) => {
-  const { active = false } = props;
+  const { active = false, onFilterClick, filter } = props;
 
   if (active) {
     return (

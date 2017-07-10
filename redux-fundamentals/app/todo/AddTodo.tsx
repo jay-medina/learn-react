@@ -4,7 +4,7 @@ export interface AddTodoProps {
   onAddClick: (inputValue: string) => void;
 }
 
-export class AddTodo extends React.PureComponent<AddTodoProps, any> {
+export default class extends React.PureComponent<AddTodoProps, any> {
   constructor(props: AddTodoProps) {
     super(props);
     this.onInputChange = this.onInputChange.bind(this);

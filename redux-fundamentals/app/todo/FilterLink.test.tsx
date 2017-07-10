@@ -4,12 +4,12 @@ import { FilterLink } from './FilterLink';
 
 describe('FilterLink', function () {
   let wrapper: ShallowWrapper<any, any>;
-  const dispatch = jest.fn();
+  const onFilterClick = jest.fn();
 
   describe('active', function () {
     beforeEach(function () {
       wrapper = shallow(
-        <FilterLink dispatch={dispatch} filter={'SHOW_COMPLETED'} active />,
+        <FilterLink onFilterClick={onFilterClick} filter={'SHOW_COMPLETED'} active />,
       );
     });
 
@@ -21,10 +21,11 @@ describe('FilterLink', function () {
       expect(wrapper.find('a').length).toBe(0);
     });
   });
+
   describe('inactive', function () {
     beforeEach(function () {
       wrapper = shallow(
-        <FilterLink dispatch={dispatch} filter={'SHOW_COMPLETED'} />,
+        <FilterLink onFilterClick={onFilterClick} filter={'SHOW_COMPLETED'} />,
       );
     });
 
@@ -39,11 +40,8 @@ describe('FilterLink', function () {
         });
       });
 
-      it('dispatches a set visibility filter', function () {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: 'SET_VISIBILITY_FILTER',
-          filter: 'SHOW_COMPLETED',
-        });
+      it('invokes onFilterClick with the filter', function () {
+        expect(onFilterClick).toHaveBeenCalledWith('SHOW_COMPLETED');
       });
     });
   });

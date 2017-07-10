@@ -2,9 +2,9 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import TodoApp from './TodoApp';
 import { Todo, TodoAction } from './reducers/todoListReducer';
-import { FilterLink } from './FilterLink';
 import TodoList from './TodoList';
-import {AddTodo} from './AddTodo';
+import Footer from './Footer';
+import AddTodo from './AddTodo';
 
 describe('todo/TodoApp', function() {
   let wrapper: ShallowWrapper<any, any>;
@@ -28,14 +28,8 @@ describe('todo/TodoApp', function() {
     expect(wrapper.find(TodoList).length).toBe(1);
   });
 
-  it('renders the filter links', function () {
-    expect(wrapper.find(FilterLink).length).toBe(3);
-  });
-
-  it('indicates that show all filter link is active', function () {
-    const AllFilterLink = wrapper.find(FilterLink).at(0);
-    expect(AllFilterLink.prop('filter')).toEqual('SHOW_ALL');
-    expect(AllFilterLink.prop('active')).toBe(true);
+  it('renders the Footer', function () {
+    expect(wrapper.find(Footer).length).toBe(1);
   });
 
   describe('when filter is active', function () {
@@ -43,17 +37,6 @@ describe('todo/TodoApp', function() {
       wrapper = shallow(
         <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_ACTIVE" />,
       );
-    });
-
-    it('show all filter link is not active', function () {
-      const AllFilterLink = wrapper.find(FilterLink).at(0);
-      expect(AllFilterLink.prop('active')).toBe(false);
-    });
-
-    it('indicates that show active filter link is active', function () {
-      const AllFilterLink = wrapper.find(FilterLink).at(2);
-      expect(AllFilterLink.prop('filter')).toEqual('SHOW_ACTIVE');
-      expect(AllFilterLink.prop('active')).toBe(true);
     });
 
     it('only renders active todo items', function () {
@@ -70,16 +53,21 @@ describe('todo/TodoApp', function() {
       );
     });
 
-    it('indicates that show completed filter link is active', function () {
-      const AllFilterLink = wrapper.find(FilterLink).at(1);
-      expect(AllFilterLink.prop('filter')).toEqual('SHOW_COMPLETED');
-      expect(AllFilterLink.prop('active')).toBe(true);
-    });
-
-    it('only renders active todo items', function () {
+    it('only renders completed todo items', function () {
       const todos = wrapper.find(TodoList).prop('todos');
       expect(todos.length).toBe(1);
       expect(todos[0].completed).toBe(true);
+    });
+  });
+
+  describe('when a filter is clicked', function () {
+    it('tries to set the new visibility filter', function () {
+      const onFilterClick = wrapper.find(Footer).prop('onFilterClick');
+      onFilterClick('SHOW_ACTIVE');
+      expect(dispatch).toHaveBeenCalledWith({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: 'SHOW_ACTIVE',
+      });
     });
   });
 
