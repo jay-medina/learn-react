@@ -3,6 +3,7 @@ import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterAction, TodoFilter } from './reducers/visibilityFilterReducer';
 import { FilterLink } from './FilterLink';
 import TodoList from './TodoList';
+import {AddTodo} from './AddTodo';
 
 interface TodoAppProps {
   dispatch: (action: TodoAction | FilterAction) => void;
@@ -20,15 +21,7 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
   constructor(props: TodoAppProps) {
     super(props);
     this.addTodo = this.addTodo.bind(this);
-    this.onInputChange = this.onInputChange.bind(this);
     this.toggleTodo = this.toggleTodo.bind(this);
-    this.state = {
-      inputValue : '',
-    };
-  }
-  onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    this.setState({ inputValue: e.target.value });
   }
   toggleTodo(todoId: number) {
     this.props.dispatch({
@@ -36,14 +29,13 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
       id: todoId,
     });
   }
-  addTodo() {
+  addTodo(text: string) {
     this.props.dispatch({
       type: 'ADD_TODO',
-      text: this.state.inputValue,
+      text,
       id,
     });
     id += 1;
-    this.setState({ inputValue: '' });
   }
   filterTodos() {
     const { todos, visibilityFilter } = this.props;
@@ -57,8 +49,7 @@ class TodoApp extends React.PureComponent<TodoAppProps, TodoAppState> {
   render() {
     return (
       <div>
-        <input type="text" onChange={this.onInputChange} value={this.state.inputValue} />
-        <button onClick={this.addTodo}>Add Todo</button>
+        <AddTodo onAddClick={this.addTodo} />
         <TodoList todos={this.filterTodos()} onTodoClick={this.toggleTodo}/>
         <p>
           Show:

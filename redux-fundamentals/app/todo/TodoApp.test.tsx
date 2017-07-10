@@ -4,6 +4,7 @@ import TodoApp from './TodoApp';
 import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterLink } from './FilterLink';
 import TodoList from './TodoList';
+import {AddTodo} from './AddTodo';
 
 describe('todo/TodoApp', function() {
   let wrapper: ShallowWrapper<any, any>;
@@ -19,12 +20,8 @@ describe('todo/TodoApp', function() {
     );
   });
 
-  it('renders an input text box', function () {
-    expect(wrapper.find('input').length).toBe(1);
-  });
-
-  it('renders an Add Todo button', function () {
-    expect(wrapper.find('button').text()).toEqual('Add Todo');
+  it('renders an Add Todo Section', function () {
+    expect(wrapper.find(AddTodo).length).toBe(1);
   });
 
   it('renders a list of todos', function () {
@@ -86,29 +83,15 @@ describe('todo/TodoApp', function() {
     });
   });
 
-  describe('when user inputs a value', function () {
-    it('updates the inputValue state', function () {
-      expect(wrapper.state('inputValue')).toEqual('');
-      wrapper.find('input').simulate('change', mockEvent());
-      expect(wrapper.state('inputValue')).toEqual('hello');
-    });
-  });
-
   describe('when add todo button is clicked', function () {
-    beforeEach(function () {
-      wrapper.setState({ inputValue: 'newTodo!' });
-      wrapper.find('button').simulate('click');
-    });
     it('dispatches an add todo action', function () {
+      const onAddClick = wrapper.find(AddTodo).prop('onAddClick');
+      onAddClick('newTodo!');
       expect(dispatch).toHaveBeenCalledWith({
         type: 'ADD_TODO',
         text: 'newTodo!',
         id: 1,
       });
-    });
-
-    it('resets the input value state', function () {
-      expect(wrapper.state('inputValue')).toEqual('');
     });
   });
 
