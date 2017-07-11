@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterAction, TodoFilter } from './reducers/visibilityFilterReducer';
-import { FilterLink } from './FilterLink';
-import TodoList from './TodoList';
 import VisibleTodoList from './VisibleTodoList';
 import Footer from './Footer';
 import AddTodo from './AddTodo';
