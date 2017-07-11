@@ -2,7 +2,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
 import TodoApp from './TodoApp';
 import { Todo, TodoAction } from './reducers/todoListReducer';
-import TodoList from './TodoList';
+import VisibleTodoList from './VisibleTodoList';
 import Footer from './Footer';
 import AddTodo from './AddTodo';
 
@@ -25,39 +25,11 @@ describe('todo/TodoApp', function() {
   });
 
   it('renders a list of todos', function () {
-    expect(wrapper.find(TodoList).length).toBe(1);
+    expect(wrapper.find(VisibleTodoList).length).toBe(1);
   });
 
   it('renders the Footer', function () {
     expect(wrapper.find(Footer).length).toBe(1);
-  });
-
-  describe('when filter is active', function () {
-    beforeEach(function () {
-      wrapper = shallow(
-        <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_ACTIVE" />,
-      );
-    });
-
-    it('only renders active todo items', function () {
-      const todos = wrapper.find(TodoList).prop('todos');
-      expect(todos.length).toBe(1);
-      expect(todos[0].completed).toBe(false);
-    });
-  });
-
-  describe('when filter is completed', function () {
-    beforeEach(function () {
-      wrapper = shallow(
-        <TodoApp dispatch={dispatch} todos={todos} visibilityFilter="SHOW_COMPLETED" />,
-      );
-    });
-
-    it('only renders completed todo items', function () {
-      const todos = wrapper.find(TodoList).prop('todos');
-      expect(todos.length).toBe(1);
-      expect(todos[0].completed).toBe(true);
-    });
   });
 
   describe('when a filter is clicked', function () {
@@ -86,8 +58,12 @@ describe('todo/TodoApp', function() {
   describe('when clicking on a todo', function () {
     it('dispatches a toggle todo action', function () {
       dispatch.mockClear();
-      const onTodoClick = wrapper.find(TodoList).prop('onTodoClick');
-      onTodoClick(0);
+      const onTodoClick = wrapper.find(VisibleTodoList).prop('dispatch');
+      onTodoClick({
+        type: 'TOGGLE_TODO',
+        id: 0,
+      });
+
       expect(dispatch).toHaveBeenCalledWith({
         type: 'TOGGLE_TODO',
         id: 0,
