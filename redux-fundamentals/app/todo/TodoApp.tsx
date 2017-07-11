@@ -3,6 +3,7 @@ import { Todo, TodoAction } from './reducers/todoListReducer';
 import { FilterAction, TodoFilter } from './reducers/visibilityFilterReducer';
 import { FilterLink } from './FilterLink';
 import TodoList from './TodoList';
+import VisibleTodoList from './VisibleTodoList';
 import Footer from './Footer';
 import AddTodo from './AddTodo';
 
@@ -18,14 +19,7 @@ class TodoApp extends React.PureComponent<TodoAppProps, object> {
   constructor(props: TodoAppProps) {
     super(props);
     this.addTodo = this.addTodo.bind(this);
-    this.toggleTodo = this.toggleTodo.bind(this);
     this.setVisibilityFilter = this.setVisibilityFilter.bind(this);
-  }
-  toggleTodo(todoId: number) {
-    this.props.dispatch({
-      type: 'TOGGLE_TODO',
-      id: todoId,
-    });
   }
   addTodo(text: string) {
     this.props.dispatch({
@@ -41,20 +35,11 @@ class TodoApp extends React.PureComponent<TodoAppProps, object> {
       filter,
     });
   }
-  filterTodos() {
-    const { todos, visibilityFilter } = this.props;
-
-    return todos.filter((todo) => {
-      return (visibilityFilter === 'SHOW_COMPLETED' && todo.completed) ||
-        (visibilityFilter === 'SHOW_ACTIVE' && !todo.completed) ||
-        (visibilityFilter === 'SHOW_ALL');
-    });
-  }
   render() {
     return (
       <div>
         <AddTodo onAddClick={this.addTodo} />
-        <TodoList todos={this.filterTodos()} onTodoClick={this.toggleTodo}/>
+        <VisibleTodoList {...this.props} />
         <Footer onFilterClick={this.setVisibilityFilter} visibilityFilter={this.props.visibilityFilter} />
       </div>
     );
