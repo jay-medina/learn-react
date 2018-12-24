@@ -1,5 +1,5 @@
-import * as todo from './todo';
-import * as counter from './counter';
+(() => {
+  const todoContainer = document.getElementById('todo-container')!;
 
-todo.start();
-counter.start();
+  todoContainer.innerText = 'hello world';
+})();
