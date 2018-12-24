@@ -4,6 +4,7 @@ interface Props {
     value: number;
     onIncrement(): void;
     onDecrement(): void;
+    onRemove(): void;
 }
 
 interface CounterListProps {
@@ -11,19 +12,24 @@ interface CounterListProps {
     onAddCounter(): void;
     onIncrement(index: number): void;
     onDecrement(index: number): void;
+    onRemoveCounter(index: number): void;
 }
 
-export const Counter = ({ value, onIncrement, onDecrement }: Props) => (
-    <div>
-        <h1>{value}</h1>
-        <button onClick={onIncrement}>+</button>
-        <button onClick={onDecrement}>-</button>
-        <button>Remove</button>
-    </div>
-);
+export const Counter = (props: Props) => {
+    const { value, onIncrement, onDecrement, onRemove } = props;
+
+    return (
+        <div>
+            <h1>{value}</h1>
+            <button onClick={onIncrement}>+</button>
+            <button onClick={onDecrement}>-</button>
+            <button onClick={onRemove}>Remove</button>
+        </div>
+    );
+};
 
 export const CounterList = (props: CounterListProps) => {
-    const { counters, onIncrement, onDecrement, onAddCounter } = props;
+    const { counters, onIncrement, onDecrement, onAddCounter, onRemoveCounter } = props;
     const onCounterIncrement = (index: number) => () => {
         onIncrement(index);
     };
@@ -32,12 +38,17 @@ export const CounterList = (props: CounterListProps) => {
         onDecrement(index);
     };
 
+    const onRemove = (index: number) => () => {
+        onRemoveCounter(index);
+    };
+
     const arr = counters.map((counter, index) => (
         <Counter
             key={index}
             value={counter}
             onIncrement={onCounterIncrement(index)}
-            onDecrement={onCounterDecrement(index)} />
+            onDecrement={onCounterDecrement(index)}
+            onRemove={onRemove(index)} />
     ));
 
     return (

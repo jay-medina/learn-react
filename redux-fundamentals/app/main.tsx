@@ -18,6 +18,10 @@ const onAddCounter = () => {
     store.dispatch({ type: 'ADD' });
 };
 
+const onRemoveCounter = (index: number) => {
+    store.dispatch({ type: 'REMOVE', payload: { index } });
+};
+
 const render = () => {
     const counterContainer = document.getElementById('counter-container');
 
@@ -27,6 +31,7 @@ const render = () => {
             onIncrement={onIncrement}
             onDecrement={onDecrement}
             onAddCounter={onAddCounter}
+            onRemoveCounter={onRemoveCounter}
         />,
         counterContainer
     );
