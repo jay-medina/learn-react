@@ -1,4 +1,4 @@
-import { counter, CounterAction } from './reducer';
+import { addCounter, counter, CounterAction, CounterListAction, incrementCounter, removeCounter } from './reducer';
 
 describe('counter', () => {
     const increment: CounterAction = {
@@ -30,6 +30,38 @@ describe('counter', () => {
     });
 
     it('should return back the initial state', () => {
-      expect(counter(undefined, {} as any)).toBe(0);
+        expect(counter(undefined, {} as any)).toBe(0);
     });
+});
+
+describe('addCounter', () => {
+    it('appends a new counter to the list', () => {
+        const listBefore: number[] = [];
+        const listAfter = [0];
+
+        expect(addCounter(listBefore)).toEqual(listAfter);
+        expect(listBefore.length).toBe(0);
+    });
+});
+
+describe('removeCounter', () => {
+    const listBefore = [0, 10, 20];
+    const listAfter = [0, 20];
+
+    expect(removeCounter(listBefore, 1)).toEqual(listAfter);
+    expect(listBefore).toHaveLength(3);
+});
+
+describe('incrementCounter', () => {
+    const listBefore = [0, 10, 20];
+    const listAfter = [0, 11, 20];
+    const action: CounterListAction = {
+        type: 'INCREMENT',
+        payload: {
+            index: 1,
+        }
+    };
+
+    expect(incrementCounter(listBefore, action)).toEqual(listAfter);
+    expect(listBefore).toEqual([0, 10, 20]);
 });

@@ -2,6 +2,10 @@
   "extends": "tslint:recommended",
   "rules": {
     "quotemark": [true, "single"],
-    "interface-name": false
+    "interface-name": false,
+    "member-access": false,
+    "trailing-comma": false,
+    "curly": false,
+    "object-literal-sort-keys": false
   }
 }
