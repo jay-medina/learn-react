@@ -8,20 +8,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  * @type webpack.Configuration
  */
 module.exports = {
-  entry: './app/main.ts',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'app/index.js'
-  },
+  entry: './app/main.tsx',
   mode: 'development',
   devServer: {
-    inline: true,
-    port: 8080
+    port: 8080,
+    disableHostCheck: true
   },
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
-  devtool: "cheap-eval-source-map",
   module: {
     rules: [
       {

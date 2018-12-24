@@ -8,17 +8,13 @@
       "name": "Debug tests",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/.bin/jest",
-      "protocol": "inspector",
       "console": "integratedTerminal",
-      "args": [
-        "--runInBand",
-        "--no-cache",
-        "--config",
-        "${workspaceRoot}/jest.debug.json",
-        "--env=jest-environment-node-debug"
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand"
       ],
-      "sourceMaps": true
+      "port": 9229
     }
   ]
 }
