@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { Todo, TodoApp, TodoAppAction, ToggleTodoAction } from './types';
+import { Todo, TodoApp, TodoAppAction, ToggleTodoAction } from '../types';
 import { visibilityFilter } from './visibilityReducer';
 
 export function toggleTodo(state: Todo, action: ToggleTodoAction): Todo {

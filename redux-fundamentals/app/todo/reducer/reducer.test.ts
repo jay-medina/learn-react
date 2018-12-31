@@ -1,5 +1,5 @@
 import { todos } from './reducer';
-import { Todo, AddTodoAction, ToggleTodoAction } from './types';
+import { Todo, AddTodoAction, ToggleTodoAction } from '../types';
 
 describe('todos reducer', () => {
     test('default case', () => {
