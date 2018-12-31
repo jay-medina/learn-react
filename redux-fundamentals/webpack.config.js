@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  * @type webpack.Configuration
  */
 module.exports = {
-  entry: './app/main.tsx',
+  entry: './app/main.ts',
   mode: 'development',
   devServer: {
     port: 8080,
