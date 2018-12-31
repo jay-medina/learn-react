@@ -24,7 +24,7 @@ export interface TodoApp {
     visibilityFilter: VisibilityFilter;
 }
 
-export type VisibilityFilter = 'SHOW_ALL';
+export type VisibilityFilter = 'SHOW_ALL' | 'SHOW_ACTIVE' | 'SHOW_COMPLETED';
 
 export interface SetFilterAction extends Action {
     type: 'SET_VISIBILITY_FILTER';

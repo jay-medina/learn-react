@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createStore, Store } from 'redux';
 import { todoApp } from './reducer';
 import { TodoApp } from './component';
-import { TodoApp as TodoAppType, TodoAppAction } from './types';
+import { TodoApp as TodoAppType, TodoAppAction, VisibilityFilter } from './types';
 let nextTodoId = 0;
 
 const render = (store: Store<TodoAppType, TodoAppAction>) => () => {
@@ -17,9 +17,29 @@ const render = (store: Store<TodoAppType, TodoAppAction>) => () => {
         });
     };
 
-    const { todos } = store.getState();
+    const onToggleTodo = (id: number) => {
+        store.dispatch({
+            type: 'TOGGLE_TODO',
+            id,
+        });
+    };
 
-    ReactDOM.render(<TodoApp onClick={onAddTodo} todos={todos} />, todoContainer);
+    const onFilterClick = (filter: VisibilityFilter) => {
+        store.dispatch({
+            type: 'SET_VISIBILITY_FILTER',
+            visibilityFilter: filter,
+        });
+    };
+
+    ReactDOM.render(
+        <TodoApp
+            onAddTodo={onAddTodo}
+            onItemClick={onToggleTodo}
+            onFilterClick={onFilterClick}
+            {...store.getState()}
+        />,
+        todoContainer
+    );
 };
 
 export function start() {
