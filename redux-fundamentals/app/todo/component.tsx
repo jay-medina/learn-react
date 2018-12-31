@@ -9,6 +9,12 @@ interface Props {
     onFilterClick(filter: string): void;
 }
 
+interface TodoProps {
+    completed: boolean;
+    text: string;
+    onClick(): void;
+}
+
 interface TodoListProps {
     todos: Todo[];
     onItemClick(id: number): void;
@@ -39,26 +45,26 @@ const FilterLink: React.SFC<FilterLinkProps> = props => {
     );
 };
 
+function TodoItem({ onClick, completed, text }: TodoProps) {
+    const className = completed ? 'completed' : '';
+
+    return (
+        <li onClick={onClick} className={className}>
+            {text}
+        </li>
+    );
+}
+
 function TodoList({ todos, onItemClick }: TodoListProps) {
     const onTodoItemClick = (todo: Todo) => () => {
         onItemClick(todo.id);
     };
 
-    const getListItem = (todo: Todo) => {
-        const getClassName = () => {
-            if (todo.completed) return 'completed';
+    const listItem = (todo: Todo) => (
+        <TodoItem key={todo.id} {...todo} onClick={onTodoItemClick(todo)} />
+    );
 
-            return '';
-        };
-
-        return (
-            <li key={todo.id} onClick={onTodoItemClick(todo)} className={getClassName()}>
-                {todo.text}
-            </li>
-        );
-    };
-
-    return <ul>{todos.map(getListItem)}</ul>;
+    return <ul>{todos.map(listItem)}</ul>;
 }
 
 function getVisibleTodos(todos: Todo[], filter: VisibilityFilter) {
