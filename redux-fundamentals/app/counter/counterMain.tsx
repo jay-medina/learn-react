@@ -37,5 +37,7 @@ const render = () => {
   );
 };
 
-store.subscribe(render);
-render();
+export function start() {
+  store.subscribe(render);
+  render();
+}

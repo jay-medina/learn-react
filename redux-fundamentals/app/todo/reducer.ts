@@ -1,32 +1,19 @@
-import { Action } from 'redux';
+import { combineReducers } from 'redux';
+import { Todo, TodoApp, TodoAppAction, ToggleTodoAction } from './types';
+import { visibilityFilter } from './visibilityReducer';
 
-export interface Todo {
-    id: number;
-    text: string;
-    completed: boolean;
-}
+export function toggleTodo(state: Todo, action: ToggleTodoAction): Todo {
+    if (state.id !== action.id) {
+        return state;
+    }
 
-export interface AddTodoAction extends Action {
-    type: 'ADD_TODO';
-    id: number;
-    text: string;
-}
-
-export interface ToggleTodoAction extends Action {
-    type: 'TOGGLE_TODO';
-    id: number;
-}
-
-export type TodoListAction = AddTodoAction | ToggleTodoAction;
-
-export function toggleTodo(todo: Todo): Todo {
     return {
-        ...todo,
-        completed: !todo.completed,
+        ...state,
+        completed: !state.completed,
     };
 }
 
-export function todos(state: Todo[] = [], action: TodoListAction): Todo[] {
+export function todos(state: Todo[] = [], action: TodoAppAction): Todo[] {
     switch (action.type) {
         case 'ADD_TODO':
             return [
@@ -37,18 +24,16 @@ export function todos(state: Todo[] = [], action: TodoListAction): Todo[] {
                     completed: false,
                 },
             ];
-        case 'TOGGLE_TODO':
-            return state.map(todo => {
-                if (todo.id !== action.id) {
-                    return todo;
-                }
 
-                return {
-                    ...todo,
-                    completed: !todo.completed,
-                };
-            });
+        case 'TOGGLE_TODO':
+            return state.map(t => toggleTodo(t, action));
+
         default:
             return state;
     }
 }
+
+export const todoApp = combineReducers<TodoApp, TodoAppAction>({
+    todos,
+    visibilityFilter,
+});

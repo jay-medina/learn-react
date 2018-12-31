@@ -1,20 +1,5 @@
-import { AddTodoAction, Todo, todos, toggleTodo, ToggleTodoAction } from './reducer';
-
-test('toggleTodo', () => {
-    const todoBefore = {
-        id: 0,
-        text: 'Learn Redux',
-        completed: false,
-    };
-
-    const todoAfter = {
-        id: 0,
-        text: 'Learn Redux',
-        completed: true,
-    };
-
-    expect(toggleTodo(todoBefore)).toEqual(todoAfter);
-});
+import { todos } from './reducer';
+import { Todo, AddTodoAction, ToggleTodoAction } from './types';
 
 describe('todos reducer', () => {
     test('default case', () => {
