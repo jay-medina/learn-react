@@ -1,11 +1,28 @@
 {
-  "extends": "tslint:recommended",
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
   "rules": {
-    "quotemark": [true, "single"],
-    "interface-name": false,
-    "member-access": false,
-    "trailing-comma": false,
-    "curly": false,
-    "object-literal-sort-keys": false
-  }
+      "member-access": false,
+      "max-classes-per-file": false,
+      "quotemark": [true, "single", "jsx-double"],
+      "arrow-parens": false,
+      "member-ordering": [
+          true,
+          {
+              "order": [
+                  "private-instance-field",
+                  "public-instance-field",
+                  "public-constructor",
+                  "public-instance-method",
+                  "public-static-method"
+              ]
+          }
+      ],
+      "interface-name": false,
+      "trailing-comma": false,
+      "curly": false,
+      "object-literal-sort-keys": false
+  },
+  "rulesDirectory": []
 }
